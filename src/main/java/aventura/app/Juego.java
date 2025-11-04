@@ -77,6 +77,35 @@ public class Juego {
         scanner.close();
     }
 
+    /**
+     * Metodo que mueve la posicion en la que estamos a la derecha, comprobando que no este en el limite de la derecha.
+     *
+     * @param habitacionActual la habitacion()
+     * @return
+     */
+    private static int irALaDerecha(int habitacionActual) {
+
+        if (habitacionActual < habitaciones.length - 1) {
+            System.out.println("Te has movido a la derecha");
+            habitacionActual++;
+        } else {
+            System.out.println("No hay nada mas allá del establo");
+        }
+
+        return habitacionActual;
+    }
+
+    private static int irALaIzquierda(int habitacionActual) {
+        if (habitacionActual != 0) {
+            System.out.println("Te has movido a la izquierda");
+            habitacionActual--;
+        } else {
+            System.out.println("Estas en la habitacion de las cajas, no hay nada mas a la izquierda");
+        }
+
+        return habitacionActual;
+    }
+
     /*
     (Opcional - Buenas Prácticas)
     Si el 'switch' se vuelve muy grande, podéis crear métodos privados
