@@ -77,11 +77,39 @@ public class Juego {
         scanner.close();
     }
 
-    /*
-    (Opcional - Buenas Prácticas)
-    Si el 'switch' se vuelve muy grande, podéis crear métodos privados
-    para organizar el código, por ejemplo:
-    private static void procesarComandoCoger(String comando) { ... }
-    private static void mostrarInfoHabitacion() { ... }
-    */
+    /**
+     * Metodo que mueve la posicion en la que estamos a la derecha, comprobando que no este en el limite de la derecha.
+     *
+     * @param habitacionActual la habitacion (posicion en la que estoy)
+     * @return la nueva habitacion (posicion) en la que me encuentro
+     */
+    private static int irALaDerecha(int habitacionActual) {
+
+        if (habitacionActual < habitaciones.length - 1) { //se resta 1 a la longitud porque es de 0 a 2, y no salte la excepcion IndexOutBounds
+            habitacionActual++;
+            System.out.println("Te has movido a la derecha");
+        } else {
+            System.out.println("No hay nada mas allá del establo");
+        }
+
+        return habitacionActual;
+    }
+
+    /**
+     * Metodo que mueve la posicion en la que estamos a la izquierda, comprobando que no este en el limite de la izquierda.
+     *
+     * @param habitacionActual la habitacion (posicion en la que estoy)
+     * @return la nueva habitacion (posicion) en la que me encuentro
+     */
+    private static int irALaIzquierda(int habitacionActual) {
+        if (habitacionActual != 0) {
+            habitacionActual--;
+            System.out.println("Te has movido a la izquierda");
+        } else {
+            System.out.println("Estas en la habitacion de las cajas, no hay nada mas a la izquierda");
+        }
+
+        return habitacionActual;
+    }
+
 }
