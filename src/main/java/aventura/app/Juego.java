@@ -80,8 +80,8 @@ public class Juego {
     /**
      * Metodo que mueve la posicion en la que estamos a la derecha, comprobando que no este en el limite de la derecha.
      *
-     * @param habitacionActual la habitacion()
-     * @return
+     * @param habitacionActual la habitacion (posicion en la que estoy)
+     * @return la nueva habitacion (posicion) en la que me encuentro
      */
     private static int irALaDerecha(int habitacionActual) {
 
@@ -95,6 +95,11 @@ public class Juego {
         return habitacionActual;
     }
 
+    /**
+     * Metodo que mueve la posicion en la que estamos a la izquierda, comprobando que no este en el limite de la izquierda.
+     * @param habitacionActual la habitacion (posicion en la que estoy)
+     * @return la nueva habitacion (posicion) en la que me encuentro
+     */
     private static int irALaIzquierda(int habitacionActual) {
         if (habitacionActual != 0) {
             System.out.println("Te has movido a la izquierda");
