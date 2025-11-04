@@ -70,8 +70,6 @@ public class Juego {
              "ir derecha", "ir izquierda", "coger [objeto]" y "salir".
              */
 
-            irALaDerecha(habitacionActual);
-
 
         }
 
