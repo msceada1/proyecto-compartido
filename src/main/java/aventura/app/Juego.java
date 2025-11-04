@@ -70,6 +70,8 @@ public class Juego {
              "ir derecha", "ir izquierda", "coger [objeto]" y "salir".
              */
 
+            irALaDerecha(habitacionActual);
+
 
         }
 
@@ -86,8 +88,8 @@ public class Juego {
     private static int irALaDerecha(int habitacionActual) {
 
         if (habitacionActual < habitaciones.length - 1) { //se resta 1 a la longitud porque es de 0 a 2, y no salte la excepcion IndexOutBounds
-            System.out.println("Te has movido a la derecha");
             habitacionActual++;
+            System.out.println("Te has movido a la derecha");
         } else {
             System.out.println("No hay nada mas allá del establo");
         }
@@ -103,8 +105,8 @@ public class Juego {
      */
     private static int irALaIzquierda(int habitacionActual) {
         if (habitacionActual != 0) {
-            System.out.println("Te has movido a la izquierda");
             habitacionActual--;
+            System.out.println("Te has movido a la izquierda");
         } else {
             System.out.println("Estas en la habitacion de las cajas, no hay nada mas a la izquierda");
         }
