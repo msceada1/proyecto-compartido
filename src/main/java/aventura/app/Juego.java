@@ -12,25 +12,25 @@ public class Juego {
     // --- NÚCLEO: Definición de Datos (FASE 1) ---
     // Esta parte os la damos HECHA. Es el "contrato" del núcleo.
 
-    private static String descripcionJuego = "No sabes qué ha pasado. Justo cuando terminabas las clases te quedaste el último como siempre recogiendo tus cosas. " +
-            "Pero algo pasó. Lo último que recuerdas es que sentiste mucho frío y todo se volvió oscuro. Ahora estás en tu clase, pero es de noche y el instituto está cerrado." +
-            "¿Nadie te ha visto? ¿Por qué las limpiadoras no te han despertado?";
+    private static String descripcionJuego = "Estas en clase y el profesor te manda a hacer una fotocopia. " +
+            "Pero de repente pulsas el boton de imprimir y resultaba ser una maquina del tiempo ." +
+            " y has despertado en un almacen lleno de cajas en las epoca del lejano oeste";
 
     // El mapa de habitaciones.
     // TODO: (Skin) ¡Rellenad esto con vuestras descripciones!
     private static String[] habitaciones = {
-            "Estás en tu aula, el aula 103. Hay una puerta a la DERECHA.",  // Posición 0
-            "Estás en el pasillo principal. Hay puertas a la DERECHA y a la IZQUIDA.", // Posición 1
-            "Estás en el aula 105. Hay una puerta a la IZQUIERDA y has visto una 'llave' en una mesa.", // Posición 2
+            "Estás en el almacen lleno de cajas y hay un reluciente 'revolver' dentro de una caja abierta.",  // Posición 0
+            "Has salido a la calle principal, el almacen esta a la IZQUIERDA y a la DERECHA ves un antiguo establo.", // Posición 1
+            "Has entrado al establo,y ves un 'latigo' que esta como nuevo encima de una valla y tienes la calle principal a la IZQUIERDA.", // Posición 2
             // Borra las habitaciones y escribe las tuyas
     };
 
     // Los objetos que hay en cada habitación.
     // TODO: (Skin) Rellenad esto con vuestros objetos
     private static String[][] objetosMapa = {
-            {null, null},           // Objetos en Habitación 0
+            {"revolver", null},           // Objetos en Habitación 0
             {null, null},           // Objetos en Habitación 1
-            {"llave", "nota"},      // Objetos en Habitación 2
+            {"latigo", null},      // Objetos en Habitación 2
     };
 
     // El inventario del jugador. Tamaño fijo.
@@ -51,17 +51,17 @@ public class Juego {
         System.out.println("------------------------------------------");
 
         // TODO 1a: Muestra la descripción general del juego
-
+        System.out.println(descripcionJuego);
         // TODO 1b: Muestra la descripción de la primera habitación
         // Pista: System.out.println(habitaciones[...]);
-
-
+        System.out.println(habitaciones[0]);
         // TODO 2: Iniciar el bucle principal del juego (game loop)
         while (jugando) {
 
             // TODO 3: Leer el comando del usuario por teclado
             System.out.print("\n> ");
             //String comando = ...;
+
 
             /*
             TODO 4: Crear un 'switch' o una estructura 'if-else if'
