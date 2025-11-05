@@ -85,11 +85,21 @@ public class Juego {
         scanner.close();
     }
 
+    /**
+     * Metodo que asigna los comandos que se usaran
+     * @return Devuelve los comandos que se usaran
+     */
     private static String[] comandos() {
         String[] comandos = {"ayuda", "mirar", "ir a la izquierda", "ir a la derecha", "inventario", "coger objeto", "salir"};
         return comandos;
     }
 
+    /**
+     * Metodo que comprueba que el comando introducido sea valido
+     * @param comando El comando que introduce el usuario
+     * @param comandos La lista de comandos que se usan en el juego
+     * @return Si el comando introducido es valido devuelve true y si es distinto devuelve false
+     */
     private static boolean comandoValido(String comando, String[] comandos) {
 
         for (int i = 0; i < comandos().length; i++) {
