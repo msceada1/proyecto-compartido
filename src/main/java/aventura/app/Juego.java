@@ -112,10 +112,19 @@ public class Juego {
         return habitacionActual;
     }
 
-    private static void mirarInventario(String inventario) {
+    private static void mirarInventario(String[] inventario) {
 
-        for (int i = 0; i < inventario.length(); i++) {
+        boolean hayObjeto = false;
 
+        for (int i = 0; i < inventario.length; i++) {
+            if (inventario[i] != null) {
+                System.out.println("Posees : " + inventario[i]);
+                hayObjeto = true;
+            }
+        }
+
+        if (!hayObjeto) {
+            System.out.println("El inventario está vacío");
         }
     }
 
