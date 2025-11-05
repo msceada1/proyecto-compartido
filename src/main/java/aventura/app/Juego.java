@@ -112,4 +112,11 @@ public class Juego {
         return habitacionActual;
     }
 
+    private static void mirarInventario(String inventario) {
+
+        for (int i = 0; i < inventario.length(); i++) {
+
+        }
+    }
+
 }
