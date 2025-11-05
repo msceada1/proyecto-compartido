@@ -62,7 +62,7 @@ public class Juego {
 
             // TODO 3: Leer el comando del usuario por teclado
             System.out.print("\n> ");
-            String comandoIntroducido= MiEntradaSalida.leerCadena("¿Que accion quieres hacer?")
+            String comandoIntroducido= MiEntradaSalida.leerCadena("¿Que accion quieres hacer?");
 
             /*
             TODO 4: Crear un 'switch' o una estructura 'if-else if'
