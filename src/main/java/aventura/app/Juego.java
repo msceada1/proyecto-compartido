@@ -1,5 +1,8 @@
 package aventura.app;
 
+import utils.MiEntradaSalida;
+
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -59,9 +62,14 @@ public class Juego {
         // TODO 2: Iniciar el bucle principal del juego (game loop)
         while (jugando) {
 
-            // TODO 3: Leer el comando del usuario por teclado
             System.out.print("\n> ");
-            //String comando = ...;
+
+            System.out.println("Los comandos son" + Arrays.toString(comandos()));
+            String comando = MiEntradaSalida.leerCadena("¿Que accion quieres hacer?");
+
+            while (!comandoValido(comando, comandos())){
+                comando = MiEntradaSalida.leerCadena("Has introducido un comando erroneo,vuelve a intentarlo");
+            }
 
             /*
             TODO 4: Crear un 'switch' o una estructura 'if-else if'
@@ -76,22 +84,19 @@ public class Juego {
         System.out.println("¡Gracias por jugar!");
         scanner.close();
     }
-    private static String[] comandos(){
-       String[] comandos = {"ayuda","mirar","ir a la izquierda","ir a la derecha","inventario","coger objeto","salir"};
+
+    private static String[] comandos() {
+        String[] comandos = {"ayuda", "mirar", "ir a la izquierda", "ir a la derecha", "inventario", "coger objeto", "salir"};
         return comandos;
     }
-/*
-    private static boolean()
 
- */
+    private static boolean comandoValido(String comando, String[] comandos) {
 
-
-
-    /*
-    (Opcional - Buenas Prácticas)
-    Si el 'switch' se vuelve muy grande, podéis crear métodos privados
-    para organizar el código, por ejemplo:
-    private static void procesarComandoCoger(String comando) { ... }
-    private static void mostrarInfoHabitacion() { ... }
-    */
+        for (int i = 0; i < comandos().length; i++) {
+            if (comando.equalsIgnoreCase(comandos[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
