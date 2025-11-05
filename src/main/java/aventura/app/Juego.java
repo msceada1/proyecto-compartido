@@ -63,7 +63,9 @@ public class Juego {
             // TODO 3: Leer el comando del usuario por teclado
             System.out.print("\n> ");
             String comandoIntroducido= MiEntradaSalida.leerCadena("¿Que accion quieres hacer?");
-
+            while (!comandoValido(comandoIntroducido, comandos())){
+                comandoIntroducido = MiEntradaSalida.leerCadena("Has introducido un comando incorrecto, prueba de nuevo.");
+            }
             /*
             TODO 4: Crear un 'switch' o una estructura 'if-else if'
              para procesar el 'comando' del usuario.
