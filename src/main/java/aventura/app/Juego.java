@@ -115,8 +115,10 @@ public class Juego {
         return habitacionActual;
     }
 
+
     /**
      * Metodo que asigna los comandos que se usaran
+     *
      * @return Devuelve los comandos que se usaran
      */
     private static String[] comandos() {
@@ -126,7 +128,8 @@ public class Juego {
 
     /**
      * Metodo que comprueba que el comando introducido sea valido
-     * @param comando El comando que introduce el usuario
+     *
+     * @param comando  El comando que introduce el usuario
      * @param comandos La lista de comandos que se usan en el juego
      * @return Si el comando introducido es valido devuelve true y si es distinto devuelve false
      */
@@ -138,6 +141,28 @@ public class Juego {
             }
         }
         return false;
+    }
+
+    /**
+     * Metodo que informa de los objetos que hay en el inventario. No devuelve nada porque solo informa
+     * por pantalla al usuario.
+     *
+     * @param inventario El array de objetos
+     */
+    private static void mirarInventario(String[] inventario) {
+
+        boolean hayObjeto = false;
+
+        for (int i = 0; i < inventario.length; i++) {
+            if (inventario[i] != null) { //si es ditinto de null, hay un objeto y se imprime por pantalla
+                System.out.println("Posees : " + inventario[i]);
+                hayObjeto = true;
+            }
+        }
+
+        if (!hayObjeto) {
+            System.out.println("El inventario está vacío");
+        }
     }
 
 }
