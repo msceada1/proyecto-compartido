@@ -165,4 +165,21 @@ public class Juego {
         }
     }
 
+    //private static int[] cogerObjeto
+
+    /**
+     * Metodo que compruba si hay un objeto en la habitacion en la que estoy.
+     *
+     * @return {@code true} si hay objeto, {@code false} si no hay objeto
+     */
+    private static boolean hayObjeto() {
+
+        for (int i = 0; i < objetosMapa[habitacionActual].length; i++) {
+            if (objetosMapa[habitacionActual][i] != null) { //segun en la habitacion en la estamos comprobamos que en las columnas de objetosMapa haya un objetos.
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
