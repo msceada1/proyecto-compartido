@@ -85,7 +85,7 @@ public class Juego {
                 case "ir a la izquierda" -> habitacionActual = irALaIzquierda(habitacionActual);
                 case "coger objeto" -> inventario = cogerObjeto();
                 case "salir" -> jugando = false;
-
+                default -> System.out.println(Arrays.toString(comandos()));
             }
 
         }
@@ -183,7 +183,6 @@ public class Juego {
 
         if (hayObjeto()) {
             String objeto = MiEntradaSalida.leerCadena("¿Que objeto quieres coger?");
-            //Recorrer los objetos para comprobar que exista en la habitación
             for (int i = 0; i < objetosMapa[habitacionActual].length; i++) {
                 if (objeto.equalsIgnoreCase(objetosMapa[habitacionActual][i])) {
                     if (objetosMapa[habitacionActual][i] != null) {
@@ -199,9 +198,6 @@ public class Juego {
 
             }
 
-            //Buscar hueco en el inventario
-
-            //Meter objeto en el inventario y quitar de la habitación
         } else {
             System.out.println("No hay objeto donde te encuentras");
         }
