@@ -3,6 +3,7 @@ package aventura.app;
 import utils.MiEntradaSalida;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -76,14 +77,14 @@ public class Juego {
              "ir derecha", "ir izquierda", "coger [objeto]" y "salir".
              */
 
-            switch (comandoIntroducido){
-             case "ayuda" -> System.out.println(Arrays.toString(comandos()));
-             case "mirar" -> System.out.println(habitaciones[habitacionActual]);
-             case "inventario" -> mirarInventario(inventario);
-             case "ir a la derecha" -> habitacionActual = irALaDerecha(habitacionActual);
-             case "ir a la izquierda" -> habitacionActual = irALaIzquierda(habitacionActual);
-             //case "coger objeto" ->
-             case  "salir" -> jugando = false;
+            switch (comandoIntroducido) {
+                case "ayuda" -> System.out.println(Arrays.toString(comandos()));
+                case "mirar" -> System.out.println(habitaciones[habitacionActual]);
+                case "inventario" -> mirarInventario(inventario);
+                case "ir a la derecha" -> habitacionActual = irALaDerecha(habitacionActual);
+                case "ir a la izquierda" -> habitacionActual = irALaIzquierda(habitacionActual);
+                case "coger objeto" -> inventario = cogerObjeto();
+                case "salir" -> jugando = false;
 
             }
 
@@ -182,14 +183,47 @@ public class Juego {
 
         if (hayObjeto()) {
             String objeto = MiEntradaSalida.leerCadena("¿Que objeto quieres coger?");
+            //Recorrer los objetos para comprobar que exista en la habitación
             for (int i = 0; i < objetosMapa[habitacionActual].length; i++) {
-                if (objetosMapa[habitacionActual][i].equalsIgnoreCase(objeto)) {
-                    objeto = inventario[i];
+                if (objeto.equalsIgnoreCase(objetosMapa[habitacionActual][i])) {
+                    if (objetosMapa[habitacionActual][i] != null) {
+                        if (objetosMapa[habitacionActual][i].equalsIgnoreCase(objeto)) {
+                            guardarInventario(objeto);
+                            objetosMapa[habitacionActual][i] = null;
+                        }
+                    }
                 }
             }
+
+            for (int j = 0; j < objetosMapa[habitacionActual].length; j++) {
+
+            }
+
+            //Buscar hueco en el inventario
+
+            //Meter objeto en el inventario y quitar de la habitación
+        } else {
+            System.out.println("No hay objeto donde te encuentras");
         }
 
         return inventario;
+    }
+
+    private static void guardarInventario(String objeto) {
+        int ocupado = 0;
+        for (int i = 0; i < inventario.length; i++) {
+            if (inventario[i] != null) ocupado++;
+        }
+        for (int i = 0; i < inventario.length; i++) {
+            if (inventario[i] == null) {
+                inventario[i] = objeto;
+                return;
+            } else if (inventario != null) {
+                if (ocupado == inventario.length) {
+                    System.out.println("No te queda espacio en el inventario.");
+                }
+            }
+        }
     }
 
     /**
