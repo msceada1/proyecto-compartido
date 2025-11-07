@@ -2,6 +2,7 @@ package aventura.app;
 
 import utils.MiEntradaSalida;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -60,7 +61,9 @@ public class Juego {
         // TODO 2: Iniciar el bucle principal del juego (game loop)
         while (jugando) {
 
-            // TODO 3: Leer el comando del usuario por teclado
+            /**
+             * Lee el comando que has introducido y si es distinto a los comandos devuelve el error y te manda a escribir otra vez.
+             */
             System.out.print("\n> ");
             String comandoIntroducido= MiEntradaSalida.leerCadena("¿Que accion quieres hacer?");
             while (!comandoValido(comandoIntroducido, comandos())){
@@ -73,6 +76,16 @@ public class Juego {
              "ir derecha", "ir izquierda", "coger [objeto]" y "salir".
              */
 
+            switch (comandoIntroducido){
+             case "ayuda" -> System.out.println(Arrays.toString(comandos()));
+             case "mirar" -> System.out.println(habitaciones[habitacionActual]);
+             case "inventario" -> mirarInventario(inventario);
+             case "ir a la derecha" -> habitacionActual = irALaDerecha(habitacionActual);
+             case "ir a la izquierda" -> habitacionActual = irALaIzquierda(habitacionActual);
+             //case "coger objeto" ->
+             case  "salir" -> jugando = false;
+
+            }
 
         }
 
