@@ -65,8 +65,8 @@ public class Juego {
              * Lee el comando que has introducido y si es distinto a los comandos devuelve el error y te manda a escribir otra vez.
              */
             System.out.print("\n> ");
-            String comandoIntroducido= MiEntradaSalida.leerCadena("¿Que accion quieres hacer?");
-            while (!comandoValido(comandoIntroducido, comandos())){
+            String comandoIntroducido = MiEntradaSalida.leerCadena("¿Que accion quieres hacer?");
+            while (!comandoValido(comandoIntroducido, comandos())) {
                 comandoIntroducido = MiEntradaSalida.leerCadena("Has introducido un comando incorrecto, prueba de nuevo.");
             }
             /*
@@ -178,4 +178,33 @@ public class Juego {
         }
     }
 
+    private static String[] cogerObjeto() {
+
+        if (hayObjeto()) {
+            String objeto = MiEntradaSalida.leerCadena("¿Que objeto quieres coger?");
+            for (int i = 0; i < objetosMapa[habitacionActual].length; i++) {
+                if (objetosMapa[habitacionActual][i].equalsIgnoreCase(objeto)) {
+                    objeto = inventario[i];
+                }
+            }
+        }
+
+        return inventario;
+    }
+
+    /**
+     * Metodo que compruba si hay un objeto en la habitacion en la que estoy.
+     *
+     * @return {@code true} si hay objeto, {@code false} si no hay objeto
+     */
+    private static boolean hayObjeto() {
+
+        for (int i = 0; i < objetosMapa[habitacionActual].length; i++) {
+            if (objetosMapa[habitacionActual][i] != null) { //segun en la habitacion en la estamos comprobamos que en las columnas de objetosMapa haya un objetos.
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
