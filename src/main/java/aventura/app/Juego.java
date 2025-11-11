@@ -13,24 +13,18 @@ import java.util.Scanner;
  */
 public class Juego {
 
-    // --- NÚCLEO: Definición de Datos (FASE 1) ---
-    // Esta parte os la damos HECHA. Es el "contrato" del núcleo.
-
-    private static String descripcionJuego = "Estas en clase y el profesor te manda a hacer una fotocopia." +
-            "Pero de repente pulsas el boton de imprimir y resultaba ser una maquina del tiempo " +
-            "y has despertado en un almacen lleno de cajas en la epoca del lejano oeste";
+    private static String descripcionJuego = "Estas en clase y el profesor te manda a hacer una fotocopia. " +
+            "Pero de repente pulsas el boton de imprimir y resultaba ser una maquina del tiempo ." +
+            " y has despertado en un almacen lleno de cajas en las epoca del lejano oeste";
 
     // El mapa de habitaciones.
-    // TODO: (Skin) ¡Rellenad esto con vuestras descripciones!
     private static String[] habitaciones = {
-            "estás en el almacen lleno de cajas y hay un reluciente 'revolver' dentro de una caja abierta.",  // Posición 0
-            "has salido a la calle principal, el almacen esta a la IZQUIERDA y a la DERECHA ves un antiguo establo.", // Posición 1
-            "has entrado al establo y ves un 'latigo' que esta como nuevo encima de una valla y tienes la calle principal a la IZQUIERDA.", // Posición 2
+            "Estás en el almacen lleno de cajas y hay un reluciente 'revolver' dentro de una caja abierta.",  // Posición 0
+            "Has salido a la calle principal, el almacen esta a la IZQUIERDA y a la DERECHA ves un antiguo establo.", // Posición 1
+            "Has entrado al establo,y ves un 'latigo' que esta como nuevo encima de una valla y tienes la calle principal a la IZQUIERDA.", // Posición 2
             // Borra las habitaciones y escribe las tuyas
     };
 
-    // Los objetos que hay en cada habitación.
-    // TODO: (Skin) Rellenad esto con vuestros objetos
     private static String[][] objetosMapa = {
             {"revolver", null},           // Objetos en Habitación 0
             {null, null},           // Objetos en Habitación 1
@@ -47,20 +41,18 @@ public class Juego {
 
 
     public static void main(String[] args) {
-        // Puedes utilizar la clase MiEntradaSalida, que viviría en el paquete io
-        Scanner scanner = new Scanner(System.in);
-        boolean jugando = true;
+
+        boolean jugando = true; //variable boolean que reconoce si el juego sigue o termina. Mientras sea true, el programa sigue
 
         System.out.println("¡Bienvenido a 'TU PROPIA AVENTURA'!");
         System.out.println("------------------------------------------");
 
-        // TODO 1a: Muestra la descripción general del juego
         System.out.println(descripcionJuego);
-        // TODO 1b: Muestra la descripción de la primera habitación
-        // Pista: System.out.println(habitaciones[...]);
+
         System.out.println(habitaciones[0]);
+
         System.out.println("Comandos disponibles:| ayuda | mirar | inventario | ir a la derecha | ir a la izquierda | coger objeto | salir |");
-        // TODO 2: Iniciar el bucle principal del juego (game loop)
+
         while (jugando) {
 
             /**
@@ -69,41 +61,34 @@ public class Juego {
             System.out.print("\n> ");
             String comandoIntroducido = MiEntradaSalida.leerCadena("¿Que accion quieres hacer?");
             while (!comandoValido(comandoIntroducido, comandos())) {
-                comandoIntroducido = MiEntradaSalida.leerCadena("Has introducido un comando incorrecto, usa Ayuda para ver los comandos.");
+                comandoIntroducido = MiEntradaSalida.leerCadena("Has introducido un comando incorrecto, prueba de nuevo.");
             }
-            /*
-            TODO 4: Crear un 'switch' o una estructura 'if-else if'
-             para procesar el 'comando' del usuario.
-             Debe gestionar como mínimo: "ayuda", "mirar", "inventario",
-             "ir derecha", "ir izquierda", "coger [objeto]" y "salir".
-             */
 
             switch (comandoIntroducido) {
-                case "ayuda" -> System.out.println(Arrays.toString(comandos()));
-                case "mirar" -> System.out.println(habitaciones[habitacionActual]);
-                case "inventario" -> mirarInventario(inventario);
-                case "ir a la derecha" -> habitacionActual = irALaDerecha(habitacionActual);
-                case "ir a la izquierda" -> habitacionActual = irALaIzquierda(habitacionActual);
-                case "coger objeto" -> inventario = cogerObjeto();
-                case "salir" -> jugando = false;
-                default -> System.out.println(Arrays.toString(comandos()));
+                case "ayuda" -> System.out.println(Arrays.toString(comandos())); //muestra los comandos del juego
+                case "mirar" -> System.out.println(habitaciones[habitacionActual]); //muestra la habitacion donde se encuentra el usuario
+                case "inventario" -> mirarInventario(inventario); //muestra el inventario del usuario
+                case "ir a la derecha" -> habitacionActual = irALaDerecha(habitacionActual); //mueve la posicion a la derecha
+                case "ir a la izquierda" -> habitacionActual = irALaIzquierda(habitacionActual); //mueve la posicion a la izquierda
+                case "coger objeto" -> inventario = cogerObjeto(); //coge el objeto de la habitacion y lo añade al inventario
+                case "salir" -> jugando = false; //cambia el valor de jugando a false y se termina el juego
             }
 
         }
 
         System.out.println("¡Gracias por jugar!");
-        scanner.close();
     }
 
     /**
-     * Metodo que mueve la posicion en la que estamos a la derecha, comprobando que no este en el limite de la derecha.
+     * Metodo que mueve la posicion a la derecha, asegurando que si esta en el limite derecho no pueda
+     * relizar el movimiento
      *
-     * @param habitacionActual la habitacion (posicion en la que estoy)
-     * @return la nueva habitacion (posicion) en la que me encuentro
+     * @param habitacionActual la habitacion en la que se encuentra el usuario
+     * @return la nueva habitacion en la que se encuentra el usuario
      */
     private static int irALaDerecha(int habitacionActual) {
 
-        if (habitacionActual < habitaciones.length - 1) { //se resta 1 a la longitud porque es de 0 a 2, y no salte la excepcion IndexOutBounds
+        if (habitacionActual < habitaciones.length - 1) { //se resta 1 a la longitud ya que es 3 pero el indice es de 0 a 2, y no salte la excepcion IndexOutBounds
             habitacionActual++;
             System.out.println("Te has movido a la derecha," + habitaciones[habitacionActual]);
         } else {
@@ -114,15 +99,16 @@ public class Juego {
     }
 
     /**
-     * Metodo que mueve la posicion en la que estamos a la izquierda, comprobando que no este en el limite de la izquierda.
+     * Metodo que mueve la posicion a la izquierda, asegurando que si esta en el limite izquierdo no pueda
+     * realizar el movimiento
      *
-     * @param habitacionActual la habitacion (posicion en la que estoy)
-     * @return la nueva habitacion (posicion) en la que me encuentro
+     * @param habitacionActual la habitacion en la que se encuentra el usuario
+     * @return la nueva habitacion en la que se encuentra el usuario
      */
     private static int irALaIzquierda(int habitacionActual) {
-        if (habitacionActual != 0) {
+        if (habitacionActual != 0) { //mientras no se la posicion (indice) 0, se puede realizar el movimiento
             habitacionActual--;
-            System.out.println("Te has movido a la izquierda," + habitaciones[habitacionActual]);
+            System.out.println("Te has movido a la izquierda, " + habitaciones[habitacionActual]);
         } else {
             System.out.println("Estas en la habitacion de las cajas, no hay nada mas a la izquierda");
         }
@@ -132,12 +118,14 @@ public class Juego {
 
 
     /**
-     * Metodo que asigna los comandos que se usaran
+     * Metodo que asigna los comandos que el usuario debe utilizar durante la ejecucion del programa
      *
-     * @return Devuelve los comandos que se usaran
+     * @return los comandos que se usaran en el programa
      */
     private static String[] comandos() {
+
         String[] comandos = {"ayuda", "mirar", "ir a la izquierda", "ir a la derecha", "inventario", "coger objeto", "salir"};
+
         return comandos;
     }
 
@@ -146,7 +134,7 @@ public class Juego {
      *
      * @param comando  El comando que introduce el usuario
      * @param comandos La lista de comandos que se usan en el juego
-     * @return Si el comando introducido es valido devuelve true y si es distinto devuelve false
+     * @return true si el comando es valido, false en caso contrario
      */
     private static boolean comandoValido(String comando, String[] comandos) {
 
@@ -155,18 +143,18 @@ public class Juego {
                 return true;
             }
         }
+
         return false;
     }
 
     /**
-     * Metodo que informa de los objetos que hay en el inventario. No devuelve nada porque solo informa
-     * por pantalla al usuario.
+     * Metodo que informa y muestra al usuario la lista de objetos que posee en el inventario
      *
      * @param inventario El array de objetos
      */
     private static void mirarInventario(String[] inventario) {
 
-        boolean hayObjeto = false;
+        boolean hayObjeto = false; //variable que me permite saber si el inventario esta vacio o no
 
         for (int i = 0; i < inventario.length; i++) {
             if (inventario[i] != null) { //si es ditinto de null, hay un objeto y se imprime por pantalla
@@ -180,25 +168,28 @@ public class Juego {
         }
     }
 
+    /**
+     * Metodo que comprueba primero que en la habitacion en la que se encuentre el usuario haya un objeto. En caso
+     * verdadero, muestra los objetos que hay en la habitacion. Se pregunta al usuario si quiere coger el objeto. En
+     * caso afirmativo, el objeto sera introducido al inventario ocupando una posicion de este y borrando el objeto del
+     * mapa
+     *
+     * @return el inventario actualizado
+     */
     private static String[] cogerObjeto() {
 
-        if (hayObjeto()) {
-            listaOpciones();
+        if (hayObjeto()) { //se comprueba que hay objeto en la habitacion
+            listaOpciones(); //se listan los objetos
             String objeto = MiEntradaSalida.leerCadena("¿Que objeto quieres coger?");
             for (int i = 0; i < objetosMapa[habitacionActual].length; i++) {
                 if (objeto.equalsIgnoreCase(objetosMapa[habitacionActual][i])) {
-                    if (objetosMapa[habitacionActual][i] != null) {
-                        if (objetosMapa[habitacionActual][i].equalsIgnoreCase(objeto)) {
-                            guardarInventario(objeto);
-                            objetosMapa[habitacionActual][i] = null;
-                        }
+                    if (objetosMapa[habitacionActual][i].equalsIgnoreCase(objeto)) {
+                        guardarInventario(objeto);
+                        objetosMapa[habitacionActual][i] = null; //el hueco donde estaba el objeto se deja a null
                     }
                 }
             }
 
-            for (int j = 0; j < objetosMapa[habitacionActual].length; j++) {
-
-            }
 
         } else {
             System.out.println("No hay objeto donde te encuentras");
@@ -206,15 +197,27 @@ public class Juego {
 
         return inventario;
     }
-    private static void listaOpciones(){
+
+    /**
+     * Metodo que recorre los objetos de la habitacion y los muestra listado por pantalla
+     */
+    private static void listaOpciones() {
         for (int i = 0; i < objetosMapa[habitacionActual].length; i++) {
-            if (objetosMapa[habitacionActual][i] != null) {
+            if (objetosMapa[habitacionActual][i] != null) { //si es distinto de null, es un objeto y se imprime
                 System.out.println((i + 1) + ". " + objetosMapa[habitacionActual][i]);
             }
         }
     }
+
+    /**
+     * Metodo que se encarga de añadir un objeto al inventario comprobando que haya espacio para el objeto entrante
+     *
+     * @param objeto el de la habitacion en la que se encuentra el usuario
+     */
     private static void guardarInventario(String objeto) {
-        int ocupado = 0;
+
+        int ocupado = 0; //variable que se encarga de gestionar los espacios que hay ocupando el inventaerio
+
         for (int i = 0; i < inventario.length; i++) {
             if (inventario[i] != null) ocupado++;
         }
@@ -231,9 +234,9 @@ public class Juego {
     }
 
     /**
-     * Metodo que compruba si hay un objeto en la habitacion en la que estoy.
+     * Metodo que compruba si hay un objeto en la habitacion que se encuentra el usuario
      *
-     * @return {@code true} si hay objeto, {@code false} si no hay objeto
+     * @return {@code true} si hay objeto, {@code false} en caso contrario
      */
     private static boolean hayObjeto() {
 
