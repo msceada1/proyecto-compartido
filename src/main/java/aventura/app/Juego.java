@@ -149,14 +149,13 @@ public class Juego {
     }
 
     /**
-     * Metodo que informa de los objetos que hay en el inventario. No devuelve nada porque solo informa
-     * por pantalla al usuario.
+     * Metodo que informa y muestra al usuario la lista de objetos que posee en el inventario
      *
      * @param inventario El array de objetos
      */
     private static void mirarInventario(String[] inventario) {
 
-        boolean hayObjeto = false;
+        boolean hayObjeto = false; //variable que me permite saber si el inventario esta vacio o no
 
         for (int i = 0; i < inventario.length; i++) {
             if (inventario[i] != null) { //si es ditinto de null, hay un objeto y se imprime por pantalla
