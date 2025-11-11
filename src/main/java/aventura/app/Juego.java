@@ -235,9 +235,9 @@ public class Juego {
     }
 
     /**
-     * Metodo que compruba si hay un objeto en la habitacion en la que estoy.
+     * Metodo que compruba si hay un objeto en la habitacion que se encuentra el usuario
      *
-     * @return {@code true} si hay objeto, {@code false} si no hay objeto
+     * @return {@code true} si hay objeto, {@code false} en caso contrario
      */
     private static boolean hayObjeto() {
 
