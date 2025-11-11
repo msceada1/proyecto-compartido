@@ -3,8 +3,6 @@ package aventura.app;
 import utils.MiEntradaSalida;
 
 import java.util.Arrays;
-import java.util.Objects;
-import java.util.Scanner;
 
 /**
  * Clase principal del juego "Tu Propia Aventura".
@@ -18,7 +16,6 @@ public class Juego {
             " y has despertado en un almacen lleno de cajas en las epoca del lejano oeste";
 
     // El mapa de habitaciones.
-
     private static String[] habitaciones = {
             "Estás en el almacen lleno de cajas y hay un reluciente 'revolver' dentro de una caja abierta.",  // Posición 0
             "Has salido a la calle principal, el almacen esta a la IZQUIERDA y a la DERECHA ves un antiguo establo.", // Posición 1
@@ -42,8 +39,7 @@ public class Juego {
 
 
     public static void main(String[] args) {
-        // Puedes utilizar la clase MiEntradaSalida, que viviría en el paquete io
-        Scanner scanner = new Scanner(System.in);
+
         boolean jugando = true;
 
         System.out.println("¡Bienvenido a 'TU PROPIA AVENTURA'!");
@@ -80,7 +76,7 @@ public class Juego {
         }
 
         System.out.println("¡Gracias por jugar!");
-        scanner.close();
+
     }
 
     /**
