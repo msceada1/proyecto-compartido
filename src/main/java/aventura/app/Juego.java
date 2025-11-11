@@ -135,7 +135,7 @@ public class Juego {
      *
      * @param comando  El comando que introduce el usuario
      * @param comandos La lista de comandos que se usan en el juego
-     * @return  true si el comando es valido, false en caso contrario
+     * @return true si el comando es valido, false en caso contrario
      */
     private static boolean comandoValido(String comando, String[] comandos) {
 
@@ -169,25 +169,28 @@ public class Juego {
         }
     }
 
+    /**
+     * Metodo que comprueba primero que en la habitacion en la que se encuentre el usuario haya un objeto. En caso
+     * verdadero, muestra los objetos que hay en la habitacion. Se pregunta al usuario si quiere coger el objeto. En
+     * caso afirmativo, el objeto sera introducido al inventario ocupando una posicion de este y borrando el objeto del
+     * mapa
+     *
+     * @return el inventario actualizado
+     */
     private static String[] cogerObjeto() {
 
-        if (hayObjeto()) {
-            listaOpciones();
+        if (hayObjeto()) { //se comprueba que hay objeto en la habitacion
+            listaOpciones(); //se listan los objetos
             String objeto = MiEntradaSalida.leerCadena("¿Que objeto quieres coger?");
             for (int i = 0; i < objetosMapa[habitacionActual].length; i++) {
                 if (objeto.equalsIgnoreCase(objetosMapa[habitacionActual][i])) {
-                    if (objetosMapa[habitacionActual][i] != null) {
-                        if (objetosMapa[habitacionActual][i].equalsIgnoreCase(objeto)) {
-                            guardarInventario(objeto);
-                            objetosMapa[habitacionActual][i] = null;
-                        }
+                    if (objetosMapa[habitacionActual][i].equalsIgnoreCase(objeto)) {
+                        guardarInventario(objeto);
+                        objetosMapa[habitacionActual][i] = null; //el hueco donde estaba el objeto se deja a null
                     }
                 }
             }
 
-            for (int j = 0; j < objetosMapa[habitacionActual].length; j++) {
-
-            }
 
         } else {
             System.out.println("No hay objeto donde te encuentras");
@@ -195,13 +198,15 @@ public class Juego {
 
         return inventario;
     }
-    private static void listaOpciones(){
+
+    private static void listaOpciones() {
         for (int i = 0; i < objetosMapa[habitacionActual].length; i++) {
             if (objetosMapa[habitacionActual][i] != null) {
                 System.out.println((i + 1) + ". " + objetosMapa[habitacionActual][i]);
             }
         }
     }
+
     private static void guardarInventario(String objeto) {
         int ocupado = 0;
         for (int i = 0; i < inventario.length; i++) {
