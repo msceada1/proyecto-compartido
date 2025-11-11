@@ -74,7 +74,6 @@ public class Juego {
         }
 
         System.out.println("¡Gracias por jugar!");
-
     }
 
     /**
@@ -116,12 +115,14 @@ public class Juego {
 
 
     /**
-     * Metodo que asigna los comandos que se usaran
+     * Metodo que asigna los comandos que el usuario debe utilizar durante la ejecucion del programa
      *
-     * @return Devuelve los comandos que se usaran
+     * @return los comandos que se usaran en el programa
      */
     private static String[] comandos() {
+
         String[] comandos = {"ayuda", "mirar", "ir a la izquierda", "ir a la derecha", "inventario", "coger objeto", "salir"};
+
         return comandos;
     }
 
