@@ -16,16 +16,16 @@ public class Juego {
     // --- NÚCLEO: Definición de Datos (FASE 1) ---
     // Esta parte os la damos HECHA. Es el "contrato" del núcleo.
 
-    private static String descripcionJuego = "Estas en clase y el profesor te manda a hacer una fotocopia. " +
-            "Pero de repente pulsas el boton de imprimir y resultaba ser una maquina del tiempo ." +
-            " y has despertado en un almacen lleno de cajas en las epoca del lejano oeste";
+    private static String descripcionJuego = "Estas en clase y el profesor te manda a hacer una fotocopia." +
+            "Pero de repente pulsas el boton de imprimir y resultaba ser una maquina del tiempo " +
+            "y has despertado en un almacen lleno de cajas en la epoca del lejano oeste";
 
     // El mapa de habitaciones.
     // TODO: (Skin) ¡Rellenad esto con vuestras descripciones!
     private static String[] habitaciones = {
-            "Estás en el almacen lleno de cajas y hay un reluciente 'revolver' dentro de una caja abierta.",  // Posición 0
-            "Has salido a la calle principal, el almacen esta a la IZQUIERDA y a la DERECHA ves un antiguo establo.", // Posición 1
-            "Has entrado al establo,y ves un 'latigo' que esta como nuevo encima de una valla y tienes la calle principal a la IZQUIERDA.", // Posición 2
+            "estás en el almacen lleno de cajas y hay un reluciente 'revolver' dentro de una caja abierta.",  // Posición 0
+            "has salido a la calle principal, el almacen esta a la IZQUIERDA y a la DERECHA ves un antiguo establo.", // Posición 1
+            "has entrado al establo y ves un 'latigo' que esta como nuevo encima de una valla y tienes la calle principal a la IZQUIERDA.", // Posición 2
             // Borra las habitaciones y escribe las tuyas
     };
 
@@ -59,6 +59,7 @@ public class Juego {
         // TODO 1b: Muestra la descripción de la primera habitación
         // Pista: System.out.println(habitaciones[...]);
         System.out.println(habitaciones[0]);
+        System.out.println("Comandos disponibles:| ayuda | mirar | inventario | ir a la derecha | ir a la izquierda | coger objeto | salir |");
         // TODO 2: Iniciar el bucle principal del juego (game loop)
         while (jugando) {
 
@@ -68,7 +69,7 @@ public class Juego {
             System.out.print("\n> ");
             String comandoIntroducido = MiEntradaSalida.leerCadena("¿Que accion quieres hacer?");
             while (!comandoValido(comandoIntroducido, comandos())) {
-                comandoIntroducido = MiEntradaSalida.leerCadena("Has introducido un comando incorrecto, prueba de nuevo.");
+                comandoIntroducido = MiEntradaSalida.leerCadena("Has introducido un comando incorrecto, usa Ayuda para ver los comandos.");
             }
             /*
             TODO 4: Crear un 'switch' o una estructura 'if-else if'
@@ -104,7 +105,7 @@ public class Juego {
 
         if (habitacionActual < habitaciones.length - 1) { //se resta 1 a la longitud porque es de 0 a 2, y no salte la excepcion IndexOutBounds
             habitacionActual++;
-            System.out.println("Te has movido a la derecha");
+            System.out.println("Te has movido a la derecha," + habitaciones[habitacionActual]);
         } else {
             System.out.println("No hay nada mas allá del establo");
         }
@@ -121,7 +122,7 @@ public class Juego {
     private static int irALaIzquierda(int habitacionActual) {
         if (habitacionActual != 0) {
             habitacionActual--;
-            System.out.println("Te has movido a la izquierda");
+            System.out.println("Te has movido a la izquierda," + habitaciones[habitacionActual]);
         } else {
             System.out.println("Estas en la habitacion de las cajas, no hay nada mas a la izquierda");
         }
@@ -182,6 +183,7 @@ public class Juego {
     private static String[] cogerObjeto() {
 
         if (hayObjeto()) {
+            listaOpciones();
             String objeto = MiEntradaSalida.leerCadena("¿Que objeto quieres coger?");
             for (int i = 0; i < objetosMapa[habitacionActual].length; i++) {
                 if (objeto.equalsIgnoreCase(objetosMapa[habitacionActual][i])) {
@@ -204,7 +206,13 @@ public class Juego {
 
         return inventario;
     }
-
+    private static void listaOpciones(){
+        for (int i = 0; i < objetosMapa[habitacionActual].length; i++) {
+            if (objetosMapa[habitacionActual][i] != null) {
+                System.out.println((i + 1) + ". " + objetosMapa[habitacionActual][i]);
+            }
+        }
+    }
     private static void guardarInventario(String objeto) {
         int ocupado = 0;
         for (int i = 0; i < inventario.length; i++) {
