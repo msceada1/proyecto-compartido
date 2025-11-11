@@ -40,14 +40,12 @@ public class Juego {
 
     public static void main(String[] args) {
 
-        boolean jugando = true;
+        boolean jugando = true; //variable boolean que reconoce si el juego sigue o termina. Mientras sea true, el programa sigue
 
         System.out.println("¡Bienvenido a 'TU PROPIA AVENTURA'!");
         System.out.println("------------------------------------------");
 
-
         System.out.println(descripcionJuego);
-
 
         System.out.println(habitaciones[0]);
 
