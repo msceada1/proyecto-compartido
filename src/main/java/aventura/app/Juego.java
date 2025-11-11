@@ -199,9 +199,12 @@ public class Juego {
         return inventario;
     }
 
+    /**
+     * Metodo que recorre los objetos de la habitacion y los muestra listado por pantalla
+     */
     private static void listaOpciones() {
         for (int i = 0; i < objetosMapa[habitacionActual].length; i++) {
-            if (objetosMapa[habitacionActual][i] != null) {
+            if (objetosMapa[habitacionActual][i] != null) { //si es distinto de null, es un objeto y se imprime
                 System.out.println((i + 1) + ". " + objetosMapa[habitacionActual][i]);
             }
         }
