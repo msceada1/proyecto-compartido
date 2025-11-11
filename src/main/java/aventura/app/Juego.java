@@ -131,7 +131,7 @@ public class Juego {
      *
      * @param comando  El comando que introduce el usuario
      * @param comandos La lista de comandos que se usan en el juego
-     * @return Si el comando introducido es valido devuelve true y si es distinto devuelve false
+     * @return  true si el comando es valido, false en caso contrario
      */
     private static boolean comandoValido(String comando, String[] comandos) {
 
@@ -140,6 +140,7 @@ public class Juego {
                 return true;
             }
         }
+
         return false;
     }
 
