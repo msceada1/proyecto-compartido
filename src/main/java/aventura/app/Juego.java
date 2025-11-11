@@ -210,8 +210,15 @@ public class Juego {
         }
     }
 
+    /**
+     * Metodo que se encarga de añadir un objeto al inventario comprobando que haya espacio para el objeto entrante
+     *
+     * @param objeto el de la habitacion en la que se encuentra el usuario
+     */
     private static void guardarInventario(String objeto) {
-        int ocupado = 0;
+
+        int ocupado = 0; //variable que se encarga de gestionar los espacios que hay ocupando el inventaerio
+
         for (int i = 0; i < inventario.length; i++) {
             if (inventario[i] != null) ocupado++;
         }
