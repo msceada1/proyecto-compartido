@@ -13,15 +13,12 @@ import java.util.Scanner;
  */
 public class Juego {
 
-    // --- NÚCLEO: Definición de Datos (FASE 1) ---
-    // Esta parte os la damos HECHA. Es el "contrato" del núcleo.
-
     private static String descripcionJuego = "Estas en clase y el profesor te manda a hacer una fotocopia. " +
             "Pero de repente pulsas el boton de imprimir y resultaba ser una maquina del tiempo ." +
             " y has despertado en un almacen lleno de cajas en las epoca del lejano oeste";
 
     // El mapa de habitaciones.
-    // TODO: (Skin) ¡Rellenad esto con vuestras descripciones!
+
     private static String[] habitaciones = {
             "Estás en el almacen lleno de cajas y hay un reluciente 'revolver' dentro de una caja abierta.",  // Posición 0
             "Has salido a la calle principal, el almacen esta a la IZQUIERDA y a la DERECHA ves un antiguo establo.", // Posición 1
@@ -29,8 +26,6 @@ public class Juego {
             // Borra las habitaciones y escribe las tuyas
     };
 
-    // Los objetos que hay en cada habitación.
-    // TODO: (Skin) Rellenad esto con vuestros objetos
     private static String[][] objetosMapa = {
             {"revolver", null},           // Objetos en Habitación 0
             {null, null},           // Objetos en Habitación 1
@@ -54,12 +49,12 @@ public class Juego {
         System.out.println("¡Bienvenido a 'TU PROPIA AVENTURA'!");
         System.out.println("------------------------------------------");
 
-        // TODO 1a: Muestra la descripción general del juego
+
         System.out.println(descripcionJuego);
-        // TODO 1b: Muestra la descripción de la primera habitación
-        // Pista: System.out.println(habitaciones[...]);
+
+
         System.out.println(habitaciones[0]);
-        // TODO 2: Iniciar el bucle principal del juego (game loop)
+
         while (jugando) {
 
             /**
@@ -70,12 +65,6 @@ public class Juego {
             while (!comandoValido(comandoIntroducido, comandos())) {
                 comandoIntroducido = MiEntradaSalida.leerCadena("Has introducido un comando incorrecto, prueba de nuevo.");
             }
-            /*
-            TODO 4: Crear un 'switch' o una estructura 'if-else if'
-             para procesar el 'comando' del usuario.
-             Debe gestionar como mínimo: "ayuda", "mirar", "inventario",
-             "ir derecha", "ir izquierda", "coger [objeto]" y "salir".
-             */
 
             switch (comandoIntroducido) {
                 case "ayuda" -> System.out.println(Arrays.toString(comandos()));
