@@ -97,13 +97,14 @@ public class Juego {
     }
 
     /**
-     * Metodo que mueve la posicion en la que estamos a la izquierda, comprobando que no este en el limite de la izquierda.
+     * Metodo que mueve la posicion a la izquierda, asegurando que si esta en el limite izquierdo no pueda
+     * realizar el movimiento
      *
-     * @param habitacionActual la habitacion (posicion en la que estoy)
-     * @return la nueva habitacion (posicion) en la que me encuentro
+     * @param habitacionActual la habitacion en la que se encuentra el usuario
+     * @return la nueva habitacion en la que se encuentra el usuario
      */
     private static int irALaIzquierda(int habitacionActual) {
-        if (habitacionActual != 0) {
+        if (habitacionActual != 0) { //mientras no se la posicion (indice) 0, se puede realizar el movimiento
             habitacionActual--;
             System.out.println("Te has movido a la izquierda");
         } else {
