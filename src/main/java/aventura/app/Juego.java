@@ -3,6 +3,8 @@ package aventura.app;
 import utils.MiEntradaSalida;
 
 import java.util.Arrays;
+import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * Clase principal del juego "Tu Propia Aventura".
@@ -49,6 +51,8 @@ public class Juego {
 
         System.out.println(habitaciones[0]);
 
+        System.out.println("Comandos disponibles:| ayuda | mirar | inventario | ir a la derecha | ir a la izquierda | coger objeto | salir |");
+
         while (jugando) {
 
             /**
@@ -87,7 +91,7 @@ public class Juego {
 
         if (habitacionActual < habitaciones.length - 1) { //se resta 1 a la longitud ya que es 3 pero el indice es de 0 a 2, y no salte la excepcion IndexOutBounds
             habitacionActual++;
-            System.out.println("Te has movido a la derecha");
+            System.out.println("Te has movido a la derecha," + habitaciones[habitacionActual]);
         } else {
             System.out.println("No hay nada mas allá del establo");
         }
@@ -105,7 +109,7 @@ public class Juego {
     private static int irALaIzquierda(int habitacionActual) {
         if (habitacionActual != 0) { //mientras no se la posicion (indice) 0, se puede realizar el movimiento
             habitacionActual--;
-            System.out.println("Te has movido a la izquierda");
+            System.out.println("Te has movido a la izquierda, " + habitaciones[habitacionActual]);
         } else {
             System.out.println("Estas en la habitacion de las cajas, no hay nada mas a la izquierda");
         }
@@ -169,6 +173,7 @@ public class Juego {
     private static String[] cogerObjeto() {
 
         if (hayObjeto()) {
+            listaOpciones();
             String objeto = MiEntradaSalida.leerCadena("¿Que objeto quieres coger?");
             for (int i = 0; i < objetosMapa[habitacionActual].length; i++) {
                 if (objeto.equalsIgnoreCase(objetosMapa[habitacionActual][i])) {
@@ -191,7 +196,13 @@ public class Juego {
 
         return inventario;
     }
-
+    private static void listaOpciones(){
+        for (int i = 0; i < objetosMapa[habitacionActual].length; i++) {
+            if (objetosMapa[habitacionActual][i] != null) {
+                System.out.println((i + 1) + ". " + objetosMapa[habitacionActual][i]);
+            }
+        }
+    }
     private static void guardarInventario(String objeto) {
         int ocupado = 0;
         for (int i = 0; i < inventario.length; i++) {
