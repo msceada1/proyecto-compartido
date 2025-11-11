@@ -65,14 +65,13 @@ public class Juego {
             }
 
             switch (comandoIntroducido) {
-                case "ayuda" -> System.out.println(Arrays.toString(comandos()));
-                case "mirar" -> System.out.println(habitaciones[habitacionActual]);
-                case "inventario" -> mirarInventario(inventario);
-                case "ir a la derecha" -> habitacionActual = irALaDerecha(habitacionActual);
-                case "ir a la izquierda" -> habitacionActual = irALaIzquierda(habitacionActual);
-                case "coger objeto" -> inventario = cogerObjeto();
-                case "salir" -> jugando = false;
-                default -> System.out.println(Arrays.toString(comandos()));
+                case "ayuda" -> System.out.println(Arrays.toString(comandos())); //muestra los comandos del juego
+                case "mirar" -> System.out.println(habitaciones[habitacionActual]); //muestra la habitacion donde se encuentra el usuario
+                case "inventario" -> mirarInventario(inventario); //muestra el inventario del usuario
+                case "ir a la derecha" -> habitacionActual = irALaDerecha(habitacionActual); //mueve la posicion a la derecha
+                case "ir a la izquierda" -> habitacionActual = irALaIzquierda(habitacionActual); //mueve la posicion a la izquierda
+                case "coger objeto" -> inventario = cogerObjeto(); //coge el objeto de la habitacion y lo añade al inventario
+                case "salir" -> jugando = false; //cambia el valor de jugando a false y se termina el juego
             }
 
         }
