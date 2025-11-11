@@ -78,14 +78,15 @@ public class Juego {
     }
 
     /**
-     * Metodo que mueve la posicion en la que estamos a la derecha, comprobando que no este en el limite de la derecha.
+     * Metodo que mueve la posicion a la derecha, asegurando que si esta en el limite derecho no pueda
+     * relizar el movimiento
      *
-     * @param habitacionActual la habitacion (posicion en la que estoy)
-     * @return la nueva habitacion (posicion) en la que me encuentro
+     * @param habitacionActual la habitacion en la que se encuentra el usuario
+     * @return la nueva habitacion en la que se encuentra el usuario
      */
     private static int irALaDerecha(int habitacionActual) {
 
-        if (habitacionActual < habitaciones.length - 1) { //se resta 1 a la longitud porque es de 0 a 2, y no salte la excepcion IndexOutBounds
+        if (habitacionActual < habitaciones.length - 1) { //se resta 1 a la longitud ya que es 3 pero el indice es de 0 a 2, y no salte la excepcion IndexOutBounds
             habitacionActual++;
             System.out.println("Te has movido a la derecha");
         } else {
