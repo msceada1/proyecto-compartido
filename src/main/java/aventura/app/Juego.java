@@ -1,10 +1,8 @@
 package aventura.app;
 
-import utils.MiEntradaSalida;
+import io.MiEntradaSalida;
 
 import java.util.Arrays;
-import java.util.Objects;
-import java.util.Scanner;
 
 /**
  * Clase principal del juego "Tu Propia Aventura".
