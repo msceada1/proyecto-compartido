@@ -33,4 +33,12 @@ public abstract class Entidad {
         }
         this.descripcion = descripcion;
     }
+
+    @Override
+    public String toString() {
+        return "Entidad{" +
+                "nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                '}';
+    }
 }
