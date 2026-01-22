@@ -20,4 +20,8 @@ public class Jugador {
     public void setPosicion(int posicion) {
         this.posicion = posicion;
     }
+
+    public int getPosicion() {
+        return posicion;
+    }
 }
