@@ -12,4 +12,8 @@ public class Habitacion extends Entidad {
         super(nombre, descripcion);
         this.listaDeObjetos = new Objeto[MAX_CAPACIDAD_OBJETOS_POR_HABITACION];
     }
+
+    public Objeto[] getListaDeObjetos() {
+        return listaDeObjetos;
+    }
 }
