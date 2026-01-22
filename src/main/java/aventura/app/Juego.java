@@ -97,6 +97,16 @@ public class Juego {
         Habitacion establo = new Habitacion("Establo", "Esto es el establo donde se encuentran el caballo de Lucky Lucke con una preciosa montura cuyas alforjas podrían tener algo", listaDeObjetosDelEstablo);
         Habitacion habitacion[] = {almacen, pasilloPrincipal, establo};
 
+        boolean probando = true;
+        while (probando) {
+            String respuesta = MiEntradaSalida.leerCadena("Que accion deseas realizar?");
+
+            if (respuesta.equalsIgnoreCase("Ir derecha")) {
+                irALaDerecha(jugador, habitaciones);
+            } else if (respuesta.equalsIgnoreCase("Ir izquierda")) {
+                irALaIzquierda(jugador, habitaciones);
+            }
+        }
 
     }
 }
