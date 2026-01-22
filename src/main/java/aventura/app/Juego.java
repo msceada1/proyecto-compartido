@@ -10,6 +10,8 @@ import java.util.Arrays;
 
 public class Juego {
 
+    private static final int INDICE_PRIMERA_HABITACION = 0;
+
     public static void main(String[] args) {
 
 
