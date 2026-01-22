@@ -95,7 +95,10 @@ public class Juego {
         Habitacion almacen = new Habitacion("Almacén", "Esto es el almacen, una pequeña habitación pero con varios misterios alrededor", listaDeObjetosDelAlmacen);
         Habitacion pasilloPrincipal = new Habitacion("Pasillo principal", "Esto es el pasillo principal, un pasillo largo y frío, tiene unas estanterías bastante llamativas", listaDeObjetosDelPasilloPrincipal);
         Habitacion establo = new Habitacion("Establo", "Esto es el establo donde se encuentran el caballo de Lucky Lucke con una preciosa montura cuyas alforjas podrían tener algo", listaDeObjetosDelEstablo);
-        Habitacion habitacion[] = {almacen, pasilloPrincipal, establo};
+        Habitacion habitaciones[] = {almacen, pasilloPrincipal, establo};
+
+        //instancia del jugador
+        Jugador jugador = new Jugador();
 
         boolean probando = true;
         while (probando) {
