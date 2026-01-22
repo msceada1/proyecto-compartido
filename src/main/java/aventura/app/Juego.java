@@ -85,7 +85,19 @@ public class Juego {
         System.out.println("¡Gracias por jugar!");
     }
 
-    private void irALaDerecha(Jugador jugador) {
+    /**
+     * Metodo que mueve al jugador a la derecha (controlando que no esté en el limite)
+     * actualizando el indice de su posicion
+     *
+     * @param jugador el jugador del juego
+     * @param habitaciones las habitaciones que hay en la aplicacion
+     */
+    private void irALaDerecha(Jugador jugador, Habitacion[] habitaciones) {
+        if (jugador.getPosicion() < habitaciones.length - 1) {
+            jugador.setPosicion(jugador.getPosicion() + 1);
+        } else {
+            System.out.println("No hay nada más allá del " + habitaciones[jugador.getPosicion()].getNombre());
+        }
     }
 
     /**
