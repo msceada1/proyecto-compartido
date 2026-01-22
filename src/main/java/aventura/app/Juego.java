@@ -252,4 +252,18 @@ public class Juego {
 
         return false;
     }
+
+    private void inicializarJuego() throws EntidadException {
+
+        //Listas de objetos que tiene cada habitacion
+        Objeto[] listaDeObjetosDelAlmacen = {null, null, null, null, null};
+        Objeto[] listaDeObjetosDelPasilloPrincipal = {null, null, null, null, null};
+        Objeto[] listaDeObjetosDelEstablo = {null, null, null, null, null};
+
+        //habitaciones
+        Habitacion almacen = new Habitacion("Almacén", "Esto es el almacen, una pequeña habitación pero con varios misterios alrededor", listaDeObjetosDelAlmacen);
+        Habitacion pasilloPrincipal = new Habitacion("Pasillo principal", "Esto es el pasillo principal, un pasillo largo y frío, tiene unas estanterías bastante llamativas", listaDeObjetosDelPasilloPrincipal);
+        Habitacion establo = new Habitacion("Establo", "Esto es el establo donde se encuentran el caballo de Lucky Lucke con una preciosa montura cuyas alforjas podrían tener algo", listaDeObjetosDelEstablo);
+        
+    }
 }
