@@ -1,10 +1,12 @@
 package aventura.app;
 
-import utils.MiEntradaSalida;
+import domain.Habitacion;
+import domain.Jugador;
+import domain.Objeto;
+import exceptions.EntidadException;
+import io.MiEntradaSalida;
 
 import java.util.Arrays;
-import java.util.Objects;
-import java.util.Scanner;
 
 /**
  * Clase principal del juego "Tu Propia Aventura".
@@ -69,8 +71,8 @@ public class Juego {
                 case "mirar" ->
                         System.out.println(habitaciones[habitacionActual]); //muestra la habitacion donde se encuentra el usuario
                 case "inventario" -> mirarInventario(inventario); //muestra el inventario del usuario
-                case "ir a la derecha" ->
-                        habitacionActual = irALaDerecha(habitacionActual); //mueve la posicion a la derecha
+              //  case "ir a la derecha" ->
+                       // habitacionActual = //irALaDerecha(habitacionActual); //mueve la posicion a la derecha
                 case "ir a la izquierda" ->
                         habitacionActual = irALaIzquierda(habitacionActual); //mueve la posicion a la izquierda
                 case "coger objeto" ->
@@ -83,23 +85,7 @@ public class Juego {
         System.out.println("¡Gracias por jugar!");
     }
 
-    /**
-     * Metodo que mueve la posicion a la derecha, asegurando que si esta en el limite derecho no pueda
-     * relizar el movimiento
-     *
-     * @param habitacionActual la habitacion en la que se encuentra el usuario
-     * @return la nueva habitacion en la que se encuentra el usuario
-     */
-    private static int irALaDerecha(int habitacionActual) {
-
-        if (habitacionActual < habitaciones.length - 1) { //se resta 1 a la longitud ya que es 3 pero el indice es de 0 a 2, y no salte la excepcion IndexOutBounds
-            habitacionActual++;
-            System.out.println("Te has movido a la derecha," + habitaciones[habitacionActual]);
-        } else {
-            System.out.println("No hay nada mas allá del establo");
-        }
-
-        return habitacionActual;
+    private void irALaDerecha(Jugador jugador) {
     }
 
     /**
@@ -253,6 +239,7 @@ public class Juego {
         return false;
     }
 
+    //a partir de aquí empieza el código de la fase 2
     private void inicializarJuego() throws EntidadException {
 
         //Listas de objetos que tiene cada habitacion
@@ -264,6 +251,8 @@ public class Juego {
         Habitacion almacen = new Habitacion("Almacén", "Esto es el almacen, una pequeña habitación pero con varios misterios alrededor", listaDeObjetosDelAlmacen);
         Habitacion pasilloPrincipal = new Habitacion("Pasillo principal", "Esto es el pasillo principal, un pasillo largo y frío, tiene unas estanterías bastante llamativas", listaDeObjetosDelPasilloPrincipal);
         Habitacion establo = new Habitacion("Establo", "Esto es el establo donde se encuentran el caballo de Lucky Lucke con una preciosa montura cuyas alforjas podrían tener algo", listaDeObjetosDelEstablo);
-        
+        Habitacion habitacion[] = {almacen, pasilloPrincipal, establo};
+
+
     }
 }
