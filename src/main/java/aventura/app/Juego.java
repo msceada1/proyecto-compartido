@@ -32,18 +32,10 @@ public class Juego {
             System.out.println("No hay nada más allá del " + habitaciones[jugador.getPosicion()].getNombre());
         }
     }
-
-    /**
-     * Metodo que mueve la posicion a la izquierda, asegurando que si esta en el limite izquierdo no pueda
-     * realizar el movimiento
-     *
-     * @param habitacionActual la habitacion en la que se encuentra el usuario
-     * @return la nueva habitacion en la que se encuentra el usuario
-     */
-    private static int irALaIzquierda(int habitacionActual) {
-        if (habitacionActual != 0) { //mientras no se la posicion (indice) 0, se puede realizar el movimiento
-            habitacionActual--;
-            System.out.println("Te has movido a la izquierda, " + habitaciones[habitacionActual]);
+    
+    private void irALaIzquierda(Jugador jugador, Habitacion[] habitaciones) {
+        if (jugador.getPosicion() > INDICE_PRIMERA_HABITACION) {
+            jugador.setPosicion(jugador.getPosicion() - 1);
         } else {
             System.out.println("Estas en la habitacion de las cajas, no hay nada mas a la izquierda");
         }
