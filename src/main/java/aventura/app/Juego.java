@@ -16,6 +16,11 @@ public class Juego {
 
         Juego juego = new Juego();
 
+        try {
+            juego.inicializarJuego();
+        } catch (EntidadException e) {
+            e.getMessage();
+        }
     }
 
     /**
