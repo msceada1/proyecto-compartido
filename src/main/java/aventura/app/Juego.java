@@ -38,6 +38,13 @@ public class Juego {
         }
     }
 
+    /**
+     * Metodo que mueve al jugador a la izquierda (controlando que no esté en el límite) actualizando el indice
+     * de su posicion
+     *
+     * @param jugador      el jugador del juego
+     * @param habitaciones las habitaciones que hay en la aplicacion
+     */
     private void irALaIzquierda(Jugador jugador, Habitacion[] habitaciones) {
         if (jugador.getPosicion() > INDICE_PRIMERA_HABITACION) {
             jugador.setPosicion(jugador.getPosicion() - 1);
