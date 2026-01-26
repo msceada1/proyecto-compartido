@@ -24,4 +24,8 @@ public class Jugador {
     public int getPosicion() {
         return posicion;
     }
+
+    public void setInventario(Objeto[] inventario) {
+        this.inventario = inventario;
+    }
 }
