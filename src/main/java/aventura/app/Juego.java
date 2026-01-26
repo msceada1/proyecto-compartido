@@ -92,7 +92,22 @@ public class Juego {
 
         return false;
     }
-
+/*
+    private void cogerObjeto(String nombreDelObjetoACoger, Habitacion habitacion, Jugador jugador) {
+        Objeto[] inventarioActualizado = new Objeto[10];
+        for (int i = 0; i < habitacion.getListaDeObjetos().length; i++) {
+            if (habitacion.getListaDeObjetos()[i].getNombre().equalsIgnoreCase(nombreDelObjetoACoger)) {
+                if (habitacion.getListaDeObjetos()[i] instanceof Inventariable) {
+                    for (int j = 0; j < habitacion.getListaDeObjetos().length; j++) {
+                        if (inventarioActualizado[i] == null) {
+                            inventarioActualizado[i] =
+                        }
+                    }
+                }
+            }
+        }
+    }
+ */
 
     //a partir de aquí empieza el código de la fase 2
     private void inicializarJuego() throws EntidadException {
