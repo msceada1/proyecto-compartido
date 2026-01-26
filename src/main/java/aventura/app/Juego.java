@@ -53,6 +53,15 @@ public class Juego {
         }
     }
 
+    /**
+     * Metodo que accede al inventario del jugador y lo imprime por consola.
+     *
+     * @param jugador el jugador del juego
+     */
+    private void verInventario(Jugador jugador) {
+        System.out.println("Inventario: " + Arrays.toString(jugador.getInventario()));
+    }
+
 
     /**
      * Metodo que asigna los comandos que el usuario debe utilizar durante la ejecucion del programa
