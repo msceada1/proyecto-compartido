@@ -119,6 +119,8 @@ public class Juego {
                 irALaDerecha(jugador, habitaciones);
             } else if (respuesta.equalsIgnoreCase("Ir izquierda")) {
                 irALaIzquierda(jugador, habitaciones);
+            } else if (respuesta.equalsIgnoreCase("Ver inventario")) {
+                verInventario(jugador);
             }
         }
 
