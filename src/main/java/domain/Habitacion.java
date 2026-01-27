@@ -14,4 +14,8 @@ public class Habitacion extends Entidad {
     public Objeto[] getListaDeObjetos() {
         return listaDeObjetos;
     }
+
+    public void setListaDeObjetos(Objeto[] listaDeObjetos) {
+        this.listaDeObjetos = listaDeObjetos;
+    }
 }
