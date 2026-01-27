@@ -124,6 +124,14 @@ public class Juego {
         }
     }
 
+    /**
+     * Metodo encargado de comprobar si en la habitacion en la que se encuentra el jugador de la partida está
+     * el objeto que desea añadir a su inventario
+     *
+     * @param nombreDelObjetoACoger el objeto que el jugador quiere añadir a su inventario
+     * @param habitacion            la habitacion en la que se encuentra el jugador
+     * @return null si no se encontró el objeto, o, el objeto deseado en caso contrario
+     */
     private Objeto elObjetoEstaEnLaHabitacion(String nombreDelObjetoACoger, Habitacion habitacion) {
         for (int i = 0; i < habitacion.getListaDeObjetos().length; i++) {
             if (habitacion.getListaDeObjetos()[i] != null) {
