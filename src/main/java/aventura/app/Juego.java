@@ -94,6 +94,14 @@ public class Juego {
         return false;
     }
 
+    /**
+     * Metodo que se encarga de añadir el objeto al inventario del jugador de la partida realizando llamadas a otros
+     * metodos para comprobar los requisitos necesarios
+     *
+     * @param nombreDelObjetoACoger el nombre del {@link Objeto} que el jugador quiere añadir a su inventario
+     * @param habitacion            la {@link Habitacion} la {@link Habitacion} la habitacion en la que se encuentra el jugador
+     * @param jugador               el {@link Jugador} de la partida
+     */
     private void cogerObjeto(String nombreDelObjetoACoger, Habitacion habitacion, Jugador jugador) {
         if (elObjetoEstaEnLaHabitacion(nombreDelObjetoACoger, habitacion) == null) { //se comprueba si el objeto devuelto es o no es null
             System.out.println("El objeto " + nombreDelObjetoACoger + " no se encuentra en el " + habitacion.getNombre());
