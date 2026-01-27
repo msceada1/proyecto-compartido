@@ -178,12 +178,13 @@ public class Juego {
      * @param habitacion la {@link Habitacion} en la que se encuentra el usuario
      */
     private void eliminarObjetoDeLaHabitacion(Objeto objeto, Habitacion habitacion) {
+        //se instancia una nueva lista de objetos que es igual a las que tiene la habitacion
         Objeto[] objetosHabitacion = habitacion.getListaDeObjetos();
 
         for (int i = 0; i < objetosHabitacion.length; i++) {
             if (objetosHabitacion[i] == objeto) {
                 objetosHabitacion[i] = null;
-                habitacion.setListaDeObjetos(objetosHabitacion);
+                habitacion.setListaDeObjetos(objetosHabitacion);//se actualiza la lista de objetos de la habitacion con la instanciada anteriormente
                 return;
             }
         }
