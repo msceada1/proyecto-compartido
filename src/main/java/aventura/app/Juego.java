@@ -168,6 +168,13 @@ public class Juego {
         return true;
     }
 
+    /**
+     * Metodo encargado de eliminar el objeto de la habitacion una vez que el jugador lo haya añadido
+     * a su inventario
+     *
+     * @param objeto     el {@link Objeto} que se elimina de la habitación
+     * @param habitacion la {@link Habitacion} en la que se encuentra el usuario
+     */
     private void eliminarObjetoDeLaHabitacion(Objeto objeto, Habitacion habitacion) {
         Objeto[] objetosHabitacion = habitacion.getListaDeObjetos();
 
