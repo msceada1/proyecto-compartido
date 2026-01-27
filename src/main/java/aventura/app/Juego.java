@@ -143,6 +143,12 @@ public class Juego {
         return null;
     }
 
+    /**
+     * Metodo encargado de comprobar si objeto que el jugador desea añadir a su inventario es {@link Inventariable}.
+     *
+     * @param objetoParaElInventario el {@link Objeto} que el jugador desea añadir a su inventario
+     * @return {@code true} en caso afirmativo y {@code false} en caso contrario
+     */
     private boolean esUnObjetoInventariable(Objeto objetoParaElInventario) {
         return objetoParaElInventario instanceof Inventariable;
     }
