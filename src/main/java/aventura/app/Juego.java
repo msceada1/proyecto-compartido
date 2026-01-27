@@ -95,30 +95,32 @@ public class Juego {
     }
 
     private void cogerObjeto(String nombreDelObjetoACoger, Habitacion habitacion, Jugador jugador) {
-        if (elObjetoEstaEnLaHabitacion(nombreDelObjetoACoger, habitacion) == null) {
+        if (elObjetoEstaEnLaHabitacion(nombreDelObjetoACoger, habitacion) == null) { //se comprueba si el objeto devuelto es o no es null
             System.out.println("El objeto " + nombreDelObjetoACoger + " no se encuentra en el " + habitacion.getNombre());
             return;
         }
 
+        //si el metodo elObjetoEstaEnLaHabitacion devuelve el objeto deseado, se instancia en una nueva variable
         Objeto objetoParaInventario = elObjetoEstaEnLaHabitacion(nombreDelObjetoACoger, habitacion);
 
-        if (!esUnObjetoInventariable(objetoParaInventario)) {
+        if (!esUnObjetoInventariable(objetoParaInventario)) { //se comprueba que el objeto sea Inventariable
             System.out.println("No puedes equipar el objeto " + objetoParaInventario.getNombre());
             return;
         }
 
-        if (elInventarioEstaLleno(jugador)) {
+        if (elInventarioEstaLleno(jugador)) { //se comprueba si el inventario está lleno
             System.out.println("El inventario está lleno, no puedes equipar nada más");
             return;
         }
 
+        //si el inventario no está lleno se instancia un nuevo inventario que será igual al que tenia el jugador
         Objeto[] inventarioActualizado = jugador.getInventario();
 
         for (int i = 0; i < inventarioActualizado.length; i++) {
             if (inventarioActualizado[i] == null) {
                 inventarioActualizado[i] = objetoParaInventario;
-                jugador.setInventario(inventarioActualizado);
-                eliminarObjetoDeLaHabitacion(objetoParaInventario, habitacion);
+                jugador.setInventario(inventarioActualizado); //se actualiza el inventario con el instanciado antes
+                eliminarObjetoDeLaHabitacion(objetoParaInventario, habitacion); //se elimina el objeto de la habitacion
                 return;
             }
         }
