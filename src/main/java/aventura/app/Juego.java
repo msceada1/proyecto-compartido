@@ -1,6 +1,7 @@
 package aventura.app;
 
 import domain.Habitacion;
+import domain.Inventariable;
 import domain.Jugador;
 import domain.Objeto;
 import exceptions.EntidadException;
@@ -92,22 +93,72 @@ public class Juego {
 
         return false;
     }
-/*
+
     private void cogerObjeto(String nombreDelObjetoACoger, Habitacion habitacion, Jugador jugador) {
-        Objeto[] inventarioActualizado = new Objeto[10];
-        for (int i = 0; i < habitacion.getListaDeObjetos().length; i++) {
-            if (habitacion.getListaDeObjetos()[i].getNombre().equalsIgnoreCase(nombreDelObjetoACoger)) {
-                if (habitacion.getListaDeObjetos()[i] instanceof Inventariable) {
-                    for (int j = 0; j < habitacion.getListaDeObjetos().length; j++) {
-                        if (inventarioActualizado[i] == null) {
-                            inventarioActualizado[i] =
-                        }
-                    }
-                }
+        if (elObjetoEstaEnLaHabitacion(nombreDelObjetoACoger, habitacion) == null) {
+            System.out.println("El objeto " + nombreDelObjetoACoger + " no se encuentra en el " + habitacion.getNombre());
+            return;
+        }
+
+        Objeto objetoParaInventario = elObjetoEstaEnLaHabitacion(nombreDelObjetoACoger, habitacion);
+
+        if (!esUnObjetoInventariable(objetoParaInventario)) {
+            System.out.println("No puedes equipar el objeto " + objetoParaInventario.getNombre());
+            return;
+        }
+
+        if (elInventarioEstaLleno(jugador)) {
+            System.out.println("El inventario está lleno, no puedes equipar nada más");
+            return;
+        }
+
+        Objeto[] inventarioActualizado = jugador.getInventario();
+
+        for (int i = 0; i < inventarioActualizado.length; i++) {
+            if (inventarioActualizado[i] == null) {
+                inventarioActualizado[i] = objetoParaInventario;
+                jugador.setInventario(inventarioActualizado);
+                eliminarObjetoDeLaHabitacion(objetoParaInventario, habitacion);
+                return;
             }
         }
     }
- */
+
+    private Objeto elObjetoEstaEnLaHabitacion(String nombreDelObjetoACoger, Habitacion habitacion) {
+        for (int i = 0; i < habitacion.getListaDeObjetos().length; i++) {
+            if (habitacion.getListaDeObjetos()[i] != null) {
+                if (habitacion.getListaDeObjetos()[i].getNombre().equalsIgnoreCase(nombreDelObjetoACoger)) {
+                    return habitacion.getListaDeObjetos()[i];
+                }
+            }
+        }
+        return null;
+    }
+
+    private boolean esUnObjetoInventariable(Objeto objetoParaElInventario) {
+        return objetoParaElInventario instanceof Inventariable;
+    }
+
+    private boolean elInventarioEstaLleno(Jugador jugador) {
+        for (int i = 0; i < jugador.getInventario().length; i++) {
+            if (jugador.getInventario()[i] == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void eliminarObjetoDeLaHabitacion(Objeto objeto, Habitacion habitacion) {
+        Objeto[] objetosHabitacion = habitacion.getListaDeObjetos();
+
+        for (int i = 0; i < objetosHabitacion.length; i++) {
+            if (objetosHabitacion[i] == objeto) {
+                objetosHabitacion[i] = null;
+                habitacion.setListaDeObjetos(objetosHabitacion);
+                return;
+            }
+        }
+    }
 
     //a partir de aquí empieza el código de la fase 2
     private void inicializarJuego() throws EntidadException {
