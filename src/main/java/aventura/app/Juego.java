@@ -153,6 +153,12 @@ public class Juego {
         return objetoParaElInventario instanceof Inventariable;
     }
 
+    /**
+     * Metodo encargado de comprobar que el inventario esté o no lleno
+     *
+     * @param jugador el {@link Jugador} de la partida
+     * @return {@code true} sin encuentra un hueco null, y, {@code false} en caso de que no haya null
+     */
     private boolean elInventarioEstaLleno(Jugador jugador) {
         for (int i = 0; i < jugador.getInventario().length; i++) {
             if (jugador.getInventario()[i] == null) {
