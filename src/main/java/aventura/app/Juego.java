@@ -125,7 +125,7 @@ public class Juego {
     }
 
     /**
-     * Metodo encargado de comprobar si en la habitacion en la que se encuentra el jugador de la partida está
+     * Metodo encargado de comprobar y devolver si en la habitacion en la que se encuentra el jugador de la partida está
      * el objeto que desea añadir a su inventario
      *
      * @param nombreDelObjetoACoger el objeto que el jugador quiere añadir a su inventario
@@ -136,7 +136,7 @@ public class Juego {
         for (int i = 0; i < habitacion.getListaDeObjetos().length; i++) {
             if (habitacion.getListaDeObjetos()[i] != null) {
                 if (habitacion.getListaDeObjetos()[i].getNombre().equalsIgnoreCase(nombreDelObjetoACoger)) {
-                    return habitacion.getListaDeObjetos()[i];
+                    return habitacion.getListaDeObjetos()[i]; //se devuelve el objeto si se ha encontrado
                 }
             }
         }
