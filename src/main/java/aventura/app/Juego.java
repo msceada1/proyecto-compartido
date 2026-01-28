@@ -1,9 +1,6 @@
 package aventura.app;
 
-import domain.Habitacion;
-import domain.Inventariable;
-import domain.Jugador;
-import domain.Objeto;
+import domain.*;
 import exceptions.EntidadException;
 import io.MiEntradaSalida;
 
@@ -99,7 +96,7 @@ public class Juego {
      * metodos para comprobar los requisitos necesarios
      *
      * @param nombreDelObjetoACoger el nombre del {@link Objeto} que el jugador quiere añadir a su inventario
-     * @param habitacion            la {@link Habitacion} la {@link Habitacion} la habitacion en la que se encuentra el jugador
+     * @param habitacion            la {@link Habitacion}  en la que se encuentra el jugador
      * @param jugador               el {@link Jugador} de la partida
      */
     private void cogerObjeto(String nombreDelObjetoACoger, Habitacion habitacion, Jugador jugador) {
@@ -129,6 +126,7 @@ public class Juego {
                 inventarioActualizado[i] = objetoParaInventario;
                 jugador.setInventario(inventarioActualizado); //se actualiza el inventario con el instanciado antes
                 eliminarObjetoDeLaHabitacion(objetoParaInventario, habitacion); //se elimina el objeto de la habitacion
+                System.out.println("Has añadido " + nombreDelObjetoACoger + " a tu inventario");
                 return;
             }
         }
@@ -202,9 +200,10 @@ public class Juego {
     private void inicializarJuego() throws EntidadException {
 
         //Listas de objetos que tiene cada habitacion
+        Latigo latigo = new Latigo("Latigo", "Cuerda larga para defenderse de posibles peligros", true);
         Objeto[] listaDeObjetosDelAlmacen = {null, null, null, null, null};
         Objeto[] listaDeObjetosDelPasilloPrincipal = {null, null, null, null, null};
-        Objeto[] listaDeObjetosDelEstablo = {null, null, null, null, null};
+        Objeto[] listaDeObjetosDelEstablo = {latigo, null, null, null, null};
 
         //habitaciones
         Habitacion almacen = new Habitacion("Almacén", "Esto es el almacen, una pequeña habitación pero con varios misterios alrededor", listaDeObjetosDelAlmacen);
@@ -225,6 +224,9 @@ public class Juego {
                 irALaIzquierda(jugador, habitaciones);
             } else if (respuesta.equalsIgnoreCase("Ver inventario")) {
                 verInventario(jugador);
+            } else if (respuesta.equalsIgnoreCase("Coger objeto")) {
+                String objeto = MiEntradaSalida.leerCadena("Qué objeto deseas coger?");
+                cogerObjeto(objeto, habitaciones[jugador.getPosicion()], jugador);
             }
         }
 
