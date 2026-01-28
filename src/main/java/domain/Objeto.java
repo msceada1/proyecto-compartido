@@ -21,8 +21,6 @@ public abstract class Objeto extends Entidad {
 
     @Override
     public String toString() {
-        return "Objeto{" +
-                super.toString() +
-                '}';
+        return super.toString();
     }
 }
