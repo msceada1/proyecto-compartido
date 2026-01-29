@@ -200,10 +200,19 @@ public class Juego {
     private void inicializarJuego() throws EntidadException {
 
         //Listas de objetos que tiene cada habitacion
-        Latigo latigo = new Latigo("Latigo", "Cuerda larga para defenderse de posibles peligros", true);
-        Objeto[] listaDeObjetosDelAlmacen = {null, null, null, null, null};
-        Objeto[] listaDeObjetosDelPasilloPrincipal = {null, null, null, null, null};
-        Objeto[] listaDeObjetosDelEstablo = {latigo, null, null, null, null};
+        Latigo latigo = new Latigo("Latigo", "Cuerda larga para alcanzar objetos a largas distancias", true);
+        Hoz hoz = new Hoz("Hoz", "Herramienta agrícola para segar", false);
+        Palo palo = new Palo("Palo", "Instrumento de madera", true);
+        Nota nota1 = new Nota("Nota 1", "Papel con información", true, "El caballo posee la herramienta, mas esta abre un tesoro en el origen");
+        Objeto[] objetosEstanteria = {nota1, palo};
+        Mueble estanteria = new Mueble("Estantería", "Mueble con capacidad para objetos", objetosEstanteria, true);
+        Objeto[] objetosCobertizo = {hoz};
+        Mueble cobertizo = new Mueble("Cobertizo", "Espacio donde se guardan herramientas", objetosCobertizo, true);
+        Revolver revolver = new Revolver("Revólver", "Arma de fuego", 6, true);
+
+        Objeto[] listaDeObjetosDelAlmacen = {revolver, null, null, null, null};
+        Objeto[] listaDeObjetosDelPasilloPrincipal = {estanteria, null, null, null, null};
+        Objeto[] listaDeObjetosDelEstablo = {latigo, cobertizo, null, null, null};
 
         //habitaciones
         Habitacion almacen = new Habitacion("Almacén", "Esto es el almacen, una pequeña habitación pero con varios misterios alrededor", listaDeObjetosDelAlmacen);
