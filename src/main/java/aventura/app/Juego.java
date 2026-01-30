@@ -64,6 +64,22 @@ public class Juego {
         System.out.println("Te encuentras en " + habitacion.getNombre() + " y alrededor observas " + Arrays.toString(habitacion.getListaDeObjetos()));
     }
 
+    private String examinar(String nombreDelObjetoAExaminar, Objeto[] inventario, Habitacion habitacion) {
+        for (int i = 0; i < inventario.length; i++) {
+            if (inventario[i] != null && inventario[i].getNombre().equalsIgnoreCase(nombreDelObjetoAExaminar)) {
+                return inventario[i].getDescripcion();
+            }
+        }
+
+        if (elObjetoEstaEnLaHabitacion(nombreDelObjetoAExaminar, habitacion) != null) {
+            if (elObjetoEstaEnLaHabitacion(nombreDelObjetoAExaminar, habitacion).getNombre().equalsIgnoreCase(nombreDelObjetoAExaminar)) {
+                return elObjetoEstaEnLaHabitacion(nombreDelObjetoAExaminar, habitacion).getDescripcion();
+            }
+        }
+
+        return "El objeto " + nombreDelObjetoAExaminar + " no se ha encontrado";
+    }
+
     /**
      * Metodo que asigna los comandos que el usuario debe utilizar durante la ejecucion del programa
      *
