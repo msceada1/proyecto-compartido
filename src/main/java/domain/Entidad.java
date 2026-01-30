@@ -36,9 +36,6 @@ public abstract class Entidad {
 
     @Override
     public String toString() {
-        return "Entidad{" +
-                "nombre='" + nombre + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                '}';
+        return nombre;
     }
 }
