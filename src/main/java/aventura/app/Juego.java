@@ -60,6 +60,9 @@ public class Juego {
         System.out.println("Inventario: " + Arrays.toString(jugador.getInventario()));
     }
 
+    private void mirar(Habitacion habitacion) {
+        System.out.println("Te encuentras en " + habitacion.getNombre() + " y alrededor observas " + Arrays.toString(habitacion.getListaDeObjetos()));
+    }
 
     /**
      * Metodo que asigna los comandos que el usuario debe utilizar durante la ejecucion del programa
@@ -243,6 +246,8 @@ public class Juego {
             } else if (respuesta.equalsIgnoreCase("Coger objeto")) {
                 String objeto = MiEntradaSalida.leerCadena("Qué objeto deseas coger?");
                 cogerObjeto(objeto, habitaciones[jugador.getPosicion()], jugador);
+            } else if (respuesta.equalsIgnoreCase("Mirar")) {
+                mirar(habitaciones[jugador.getPosicion()]);
             }
         }
 
