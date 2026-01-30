@@ -211,7 +211,7 @@ public class Juego {
         Contenedor estanteria = new Contenedor("Estantería", "Mueble con capacidad para objetos", null, objetosEstanteria, true);
         Objeto[] objetosCobertizo = {hoz};
         Contenedor cobertizo = new Contenedor("Cobertizo", "Espacio donde se guardan herramientas", null, objetosCobertizo, true);
-        Revolver revolver = new Revolver("Revólver", "Arma de fuego", 6, true);
+        Revolver revolver = new Revolver("Revolver", "Arma de fuego", 6, true);
         Llave llave = new Llave("Llave de Lucky Lucke", "Utensilio para abrir objetos", "1234", true);
         Objeto[] objetosAlforja = {llave};
         Alforja alforja = new Alforja("Alforja", "Bolsas que se equipan a los caballos para guardar cosas", objetosAlforja, true);
