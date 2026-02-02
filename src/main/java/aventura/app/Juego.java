@@ -304,32 +304,35 @@ public class Juego {
     //a partir de aquí empieza el código de la fase 2
     private void inicializarJuego() throws EntidadException {
 
-        //Listas de objetos que tiene cada habitacion
-        Latigo latigo = new Latigo("Latigo", "Cuerda larga para alcanzar objetos a largas distancias", true);
-        Hoz hoz = new Hoz("Hoz", "Herramienta agrícola para segar", false);
+        //instancias datos primera habitacion
+        Revolver revolver = new Revolver("Revolver", "Arma de fuego", 6, true);
+        Nota notaDeEscape = new Nota("Nota del escape", "Nota que contiene la pista para escapar", true, "En la intersección se encuentra la maquina del tiempo, busca detrás de aquello que te dió información al empezar");
+        Objeto[] listaObjetosCofreDelTesoroDelAlmacen = {notaDeEscape};
+        Contenedor cofreDelTesoro = new Contenedor("Cofre del tesoro", "Cofre que guarda el secreto a la salida", "1234", listaObjetosCofreDelTesoroDelAlmacen, true);
+        Objeto[] listaDeObjetosDelAlmacen = {revolver, cofreDelTesoro};
+        Habitacion almacen = new Habitacion("Almacén", "Esto es el almacen, una pequeña habitación pero con varios misterios alrededor", listaDeObjetosDelAlmacen);
+
+        //instancias datos segunda habitacion
         Palo palo = new Palo("Palo", "Instrumento de madera", true);
         Nota nota1 = new Nota("Nota 1", "Papel con información", true, "El caballo posee la herramienta, mas esta abre un tesoro en el origen");
         Objeto[] objetosEstanteria = {nota1, palo};
         Contenedor estanteria = new Contenedor("Estantería", "Mueble con capacidad para objetos", null, objetosEstanteria, true);
+        Mueble estatua = new Mueble("Estatua de Buda", "Monumento a la religion budista", true);
+        Objeto[] listaDeObjetosDelPasilloPrincipal = {estanteria, estatua};
+        Habitacion pasilloPrincipal = new Habitacion("Pasillo principal", "Esto es el pasillo principal, un pasillo largo y frío, tiene unas estanterías bastante llamativas", listaDeObjetosDelPasilloPrincipal);
+
+        //instancias datos tercera habitacion
+        Latigo latigo = new Latigo("Latigo", "Cuerda larga para alcanzar objetos a largas distancias", true);
+        Hoz hoz = new Hoz("Hoz", "Herramienta agrícola para segar", false);
         Objeto[] objetosCobertizo = {hoz};
         Contenedor cobertizo = new Contenedor("Cobertizo", "Espacio donde se guardan herramientas", null, objetosCobertizo, true);
-        Revolver revolver = new Revolver("Revolver", "Arma de fuego", 6, true);
         Llave llave = new Llave("Llave de Lucky Lucke", "Utensilio para abrir objetos", "1234", true);
         Objeto[] objetosAlforja = {llave};
-        Alforja alforja = new Alforja("Alforja", "Bolsas que se equipan a los caballos para guardar cosas", objetosAlforja, true);
-        Nota notaDeEscape = new Nota("Nota del escape", "Nota que contiene la pista para escapar", true, "En la intersección se encuentra la maquina del tiempo, busca detrás de aquello que te dió información al empezar");
-        Objeto[] listaObjetosContenedorAlmacen = {notaDeEscape};
-        Contenedor contenedor = new Contenedor("Cofre del tesoro", "Cofre que guarda el secreto a la salida", "1234", listaObjetosContenedorAlmacen, true);
-        Mueble estatua = new Mueble("Estatua de Buda", "Monumento a la religion budista", true);
-
-        Objeto[] listaDeObjetosDelAlmacen = {revolver, contenedor};
-        Objeto[] listaDeObjetosDelPasilloPrincipal = {estanteria, estatua};
+        Contenedor alforja = new Contenedor("Alforja", "Bolsas que equipan los caballos para guardar cosas", null, objetosAlforja, true);
         Objeto[] listaDeObjetosDelEstablo = {latigo, cobertizo, alforja,};
-
-        //habitaciones
-        Habitacion almacen = new Habitacion("Almacén", "Esto es el almacen, una pequeña habitación pero con varios misterios alrededor", listaDeObjetosDelAlmacen);
-        Habitacion pasilloPrincipal = new Habitacion("Pasillo principal", "Esto es el pasillo principal, un pasillo largo y frío, tiene unas estanterías bastante llamativas", listaDeObjetosDelPasilloPrincipal);
         Habitacion establo = new Habitacion("Establo", "Esto es el establo donde se encuentran el caballo de Lucky Lucke con una preciosa montura cuyas alforjas podrían tener algo", listaDeObjetosDelEstablo);
+
+        //instanciando array de habitaciones
         Habitacion habitaciones[] = {almacen, pasilloPrincipal, establo};
 
         //instancia del jugador
