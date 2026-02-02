@@ -51,38 +51,55 @@ public class Juego {
         }
     }
 
+    /**
+     * Metodo encargado de mostrar los objetos que se encuentran en el interior de un contenedor realizando
+     * comprobaciones en base a unos criterios
+     *
+     * @param nombreContenedor el contenedo a abrir
+     * @param habitacion       la habitacion en la que se encuentra el jugador
+     * @param jugador          el {@link Jugador} de la partida
+     */
     private void abrirContenedor(String nombreContenedor, Habitacion habitacion, Jugador jugador) {
+        //se instancia un nuevo Objeto que es el que el jugador desea abrir
         Objeto elObjetoAAbrir = getObjetoHabitacion(nombreContenedor, habitacion);
 
+        //se comprueba si es o no null
         if (elObjetoAAbrir == null) {
             System.out.println("En el " + habitacion + " no hay " + nombreContenedor);
             return;
         }
 
+        //se comprueba si es inventariable
         if (!(elObjetoAAbrir instanceof Abrible)) {
             System.out.println("El " + nombreContenedor + " no se puede abrir");
             return;
         }
 
+        //se instancia una llave la cual corresponde a la que el jugador tiene en su inventario
         Llave llaveDelJugador = getLlaveInventario(jugador);
 
+        //se hace un cast al objeto a abrir (pues corresponde con un contenedor)
         Contenedor contenedor = (Contenedor) elObjetoAAbrir;
 
+        //si el codigo del contenedor es null se muestra su interior
         if (contenedor.getCodigo() == null) {
             System.out.println("Has abierto " + contenedor.getNombre() + ". Objetos contenidos:\n " + Arrays.toString(contenedor.getListaDeObjetosContenidos()));
             return;
         }
 
+        //se comprueba si el jugador tiene llave en su inventario
         if (llaveDelJugador == null) {
             System.out.println("No tienes llave en tu inventario");
             return;
         }
 
+        //se comprueba que los codigos sean iguales
         if (contenedor.getCodigo() != null && !contenedor.getCodigo().equalsIgnoreCase(llaveDelJugador.getCodigoDeSeguridad())) {
             System.out.println("El código de la llave que posees no es valido para " + contenedor.getNombre());
             return;
         }
 
+        //llegados aqui se han pasado todas las comprobaciones por lo que se muestra el contenido del contendor que tiene codigo
         System.out.println("Has abierto " + contenedor.getNombre() + " objetos contenidos:\n " + Arrays.toString(contenedor.getListaDeObjetosContenidos()));
     }
 
