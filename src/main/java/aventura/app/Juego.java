@@ -311,6 +311,9 @@ public class Juego {
             } else if (respuesta.equalsIgnoreCase("Examinar")) {
                 String objetoAExaminar = MiEntradaSalida.leerCadena("¿Que objeto deseas examinar?");
                 System.out.println(examinar(objetoAExaminar, jugador.getInventario(), habitaciones[jugador.getPosicion()]));
+            } else if (respuesta.equalsIgnoreCase("Abrir")) {
+                String objetoAAbrir = MiEntradaSalida.leerCadena("¿Que quieres abrir?");
+                abrirContenedor(objetoAAbrir, habitaciones[jugador.getPosicion()], jugador);
             }
         }
 
