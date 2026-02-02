@@ -86,6 +86,12 @@ public class Juego {
         System.out.println("Has abierto " + contenedor.getNombre() + " objetos contenidos:\n " + Arrays.toString(contenedor.getListaDeObjetosContenidos()));
     }
 
+    /**
+     * Metodo encargado de devolver la llave que el jugador posee en su inventario
+     *
+     * @param jugador el jugador del juego
+     * @return {@link Llave} si encuentra la llave o null en caso contrario
+     */
     private Llave getLlaveInventario(Jugador jugador) {
         for (int i = 0; i < jugador.getInventario().length; i++) {
             if (jugador.getInventario()[i] instanceof Llave) {
