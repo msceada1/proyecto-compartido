@@ -183,13 +183,13 @@ public class Juego {
      * @param jugador               el {@link Jugador} de la partida
      */
     private void cogerObjeto(String nombreDelObjetoACoger, Habitacion habitacion, Jugador jugador) {
-        if (getObjetoHabitacion(nombreDelObjetoACoger, habitacion) == null) { //se comprueba si el objeto devuelto es o no es null
+        //instaciamos un objeto que sera el que el jugador desea coger
+        Objeto objetoParaInventario = getObjetoHabitacion(nombreDelObjetoACoger, habitacion);
+
+        if (objetoParaInventario == null) { //se comprueba si el objeto devuelto es o no es null
             System.out.println("El objeto " + nombreDelObjetoACoger + " no se encuentra en el " + habitacion.getNombre());
             return;
         }
-
-        //si el metodo elObjetoEstaEnLaHabitacion devuelve el objeto deseado, se instancia en una nueva variable
-        Objeto objetoParaInventario = getObjetoHabitacion(nombreDelObjetoACoger, habitacion);
 
         if (!esUnObjetoInventariable(objetoParaInventario)) { //se comprueba que el objeto sea Inventariable
             System.out.println("No puedes equipar el objeto " + objetoParaInventario.getNombre());
