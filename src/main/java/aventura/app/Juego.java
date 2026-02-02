@@ -52,7 +52,7 @@ public class Juego {
     }
 
     private void abrirContenedor(String nombreContenedor, Habitacion habitacion, Jugador jugador) {
-        Objeto elObjetoAAbrir = elObjetoEstaEnLaHabitacion(nombreContenedor, habitacion);
+        Objeto elObjetoAAbrir = getObjetoHabitacion(nombreContenedor, habitacion);
 
         if (elObjetoAAbrir == null) {
             System.out.println("En el " + habitacion + " no hay " + nombreContenedor);
@@ -133,7 +133,7 @@ public class Juego {
             }
         }
 
-        Objeto elObjetoEncontrado = elObjetoEstaEnLaHabitacion(nombreDelObjetoAExaminar, habitacion);
+        Objeto elObjetoEncontrado = getObjetoHabitacion(nombreDelObjetoAExaminar, habitacion);
 
         if (elObjetoEncontrado != null) {
             if (elObjetoEncontrado.getNombre().equalsIgnoreCase(nombreDelObjetoAExaminar)) {
@@ -183,13 +183,13 @@ public class Juego {
      * @param jugador               el {@link Jugador} de la partida
      */
     private void cogerObjeto(String nombreDelObjetoACoger, Habitacion habitacion, Jugador jugador) {
-        if (elObjetoEstaEnLaHabitacion(nombreDelObjetoACoger, habitacion) == null) { //se comprueba si el objeto devuelto es o no es null
+        if (getObjetoHabitacion(nombreDelObjetoACoger, habitacion) == null) { //se comprueba si el objeto devuelto es o no es null
             System.out.println("El objeto " + nombreDelObjetoACoger + " no se encuentra en el " + habitacion.getNombre());
             return;
         }
 
         //si el metodo elObjetoEstaEnLaHabitacion devuelve el objeto deseado, se instancia en una nueva variable
-        Objeto objetoParaInventario = elObjetoEstaEnLaHabitacion(nombreDelObjetoACoger, habitacion);
+        Objeto objetoParaInventario = getObjetoHabitacion(nombreDelObjetoACoger, habitacion);
 
         if (!esUnObjetoInventariable(objetoParaInventario)) { //se comprueba que el objeto sea Inventariable
             System.out.println("No puedes equipar el objeto " + objetoParaInventario.getNombre());
@@ -223,7 +223,7 @@ public class Juego {
      * @param habitacion            la habitacion en la que se encuentra el jugador
      * @return null si no se encontró el objeto, o, el objeto deseado en caso contrario
      */
-    private Objeto elObjetoEstaEnLaHabitacion(String nombreDelObjetoACoger, Habitacion habitacion) {
+    private Objeto getObjetoHabitacion(String nombreDelObjetoACoger, Habitacion habitacion) {
         for (int i = 0; i < habitacion.getListaDeObjetos().length; i++) {
             if (habitacion.getListaDeObjetos()[i] != null) {
                 if (habitacion.getListaDeObjetos()[i].getNombre().equalsIgnoreCase(nombreDelObjetoACoger)) {
@@ -322,7 +322,7 @@ public class Juego {
             } else if (respuesta.equalsIgnoreCase("Ir izquierda")) {
                 irALaIzquierda(jugador, habitaciones);
             } else if (respuesta.equalsIgnoreCase("Ver inventario")) {
-                System.out.println("Inventario: " );
+                System.out.println("Inventario: ");
                 verInventario(jugador);
             } else if (respuesta.equalsIgnoreCase("Coger objeto")) {
                 String objeto = MiEntradaSalida.leerCadena("Qué objeto deseas coger?");
