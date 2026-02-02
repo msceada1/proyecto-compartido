@@ -114,6 +114,11 @@ public class Juego {
         }
     }
 
+    /**
+     * Metodo encargado de mostrar en que habitacion se encuentra el jugador
+     *
+     * @param habitacion la habitacion en la que se encuentra el jugador
+     */
     private void mirar(Habitacion habitacion) {
         System.out.println("Te encuentras en " + habitacion.getNombre() + " y alrededor observas " + Arrays.toString(habitacion.getListaDeObjetos()));
     }
