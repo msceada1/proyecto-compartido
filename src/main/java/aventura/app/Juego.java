@@ -119,9 +119,11 @@ public class Juego {
             }
         }
 
-        if (elObjetoEstaEnLaHabitacion(nombreDelObjetoAExaminar, habitacion) != null) {
-            if (elObjetoEstaEnLaHabitacion(nombreDelObjetoAExaminar, habitacion).getNombre().equalsIgnoreCase(nombreDelObjetoAExaminar)) {
-                return elObjetoEstaEnLaHabitacion(nombreDelObjetoAExaminar, habitacion).getDescripcion();
+        Objeto elObjetoEncontrado = elObjetoEstaEnLaHabitacion(nombreDelObjetoAExaminar, habitacion);
+
+        if (elObjetoEncontrado != null) {
+            if (elObjetoEncontrado.getNombre().equalsIgnoreCase(nombreDelObjetoAExaminar)) {
+                return elObjetoEncontrado.getDescripcion();
             }
         }
 
