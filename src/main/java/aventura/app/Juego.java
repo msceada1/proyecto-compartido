@@ -306,6 +306,7 @@ public class Juego {
             } else if (respuesta.equalsIgnoreCase("Ir izquierda")) {
                 irALaIzquierda(jugador, habitaciones);
             } else if (respuesta.equalsIgnoreCase("Ver inventario")) {
+                System.out.println("Inventario: " );
                 verInventario(jugador);
             } else if (respuesta.equalsIgnoreCase("Coger objeto")) {
                 String objeto = MiEntradaSalida.leerCadena("Qué objeto deseas coger?");
