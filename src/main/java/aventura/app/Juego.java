@@ -51,6 +51,50 @@ public class Juego {
         }
     }
 
+    private void abrirContenedor(String nombreContenedor, Habitacion habitacion, Jugador jugador) {
+        Objeto elObjetoAAbrir = elObjetoEstaEnLaHabitacion(nombreContenedor, habitacion);
+
+        if (elObjetoAAbrir == null) {
+            System.out.println("En el " + habitacion + " no hay " + nombreContenedor);
+            return;
+        }
+
+        if (!(elObjetoAAbrir instanceof Abrible)) {
+            System.out.println("El " + nombreContenedor + " no se puede abrir");
+            return;
+        }
+
+        Llave llaveDelJugador = getLlaveInventario(jugador);
+
+        Contenedor contenedor = (Contenedor) elObjetoAAbrir;
+
+        if (contenedor.getCodigo() == null) {
+            System.out.println("Has abierto " + contenedor.getNombre() + ". Objetos contenidos:\n " + Arrays.toString(contenedor.getListaDeObjetosContenidos()));
+            return;
+        }
+
+        if (llaveDelJugador == null) {
+            System.out.println("No tienes llave en tu inventario");
+            return;
+        }
+
+        if (contenedor.getCodigo() != null && !contenedor.getCodigo().equalsIgnoreCase(llaveDelJugador.getCodigoDeSeguridad())) {
+            System.out.println("El código de la llave que posees no es valido para " + contenedor.getNombre());
+            return;
+        }
+
+        System.out.println("Has abierto " + contenedor.getNombre() + " objetos contenidos:\n " + Arrays.toString(contenedor.getListaDeObjetosContenidos()));
+    }
+
+    private Llave getLlaveInventario(Jugador jugador) {
+        for (int i = 0; i < jugador.getInventario().length; i++) {
+            if (jugador.getInventario()[i] instanceof Llave) {
+                return (Llave) jugador.getInventario()[i];
+            }
+        }
+        return null;
+    }
+
     /**
      * Metodo que accede al inventario del jugador y lo imprime por consola.
      *
