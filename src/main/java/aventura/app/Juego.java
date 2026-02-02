@@ -101,7 +101,11 @@ public class Juego {
      * @param jugador el jugador del juego
      */
     private void verInventario(Jugador jugador) {
-        System.out.println("Inventario: " + Arrays.toString(jugador.getInventario()));
+        for (int i = 0; i < jugador.getInventario().length; i++) {
+            if (jugador.getInventario()[i] != null) {
+                System.out.println(jugador.getInventario()[i]);
+            }
+        }
     }
 
     private void mirar(Habitacion habitacion) {
