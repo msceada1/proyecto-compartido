@@ -112,6 +112,14 @@ public class Juego {
         System.out.println("Te encuentras en " + habitacion.getNombre() + " y alrededor observas " + Arrays.toString(habitacion.getListaDeObjetos()));
     }
 
+    /**
+     * Metodo encargado de mostrar la descripcion del objeto que el jugador desea
+     *
+     * @param nombreDelObjetoAExaminar el objeto cuya descripcion desea conocer el jugador
+     * @param inventario               el inventario del jugador
+     * @param habitacion               la habitacion en la que se encuentra el jugador
+     * @return la descripcion del objeto
+     */
     private String examinar(String nombreDelObjetoAExaminar, Objeto[] inventario, Habitacion habitacion) {
         for (int i = 0; i < inventario.length; i++) {
             if (inventario[i] != null && inventario[i].getNombre().equalsIgnoreCase(nombreDelObjetoAExaminar)) {
