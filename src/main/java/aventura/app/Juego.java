@@ -360,6 +360,9 @@ public class Juego {
             } else if (respuesta.equalsIgnoreCase("Abrir")) {
                 String objetoAAbrir = MiEntradaSalida.leerCadena("¿Que quieres abrir?");
                 abrirContenedor(objetoAAbrir, habitaciones[jugador.getPosicion()], jugador);
+            } else if (respuesta.equalsIgnoreCase("Salir")) {
+                System.out.println("¡Gracias por jugar!");
+                probando = false;
             }
         }
 
