@@ -2,7 +2,7 @@ package domain;
 
 import exceptions.EntidadException;
 
-public class Revolver extends Objeto {
+public class Revolver extends Objeto implements Inventariable {
 
     private int capacidadBalas;
 

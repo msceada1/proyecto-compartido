@@ -51,41 +51,64 @@ public class Juego {
         }
     }
 
+    /**
+     * Metodo encargado de mostrar los objetos que se encuentran en el interior de un contenedor realizando
+     * comprobaciones en base a unos criterios
+     *
+     * @param nombreContenedor el contenedo a abrir
+     * @param habitacion       la habitacion en la que se encuentra el jugador
+     * @param jugador          el {@link Jugador} de la partida
+     */
     private void abrirContenedor(String nombreContenedor, Habitacion habitacion, Jugador jugador) {
-        Objeto elObjetoAAbrir = elObjetoEstaEnLaHabitacion(nombreContenedor, habitacion);
+        //se instancia un nuevo Objeto que es el que el jugador desea abrir
+        Objeto elObjetoAAbrir = getObjetoHabitacion(nombreContenedor, habitacion);
 
+        //se comprueba si es o no null
         if (elObjetoAAbrir == null) {
             System.out.println("En el " + habitacion + " no hay " + nombreContenedor);
             return;
         }
 
+        //se comprueba si es inventariable
         if (!(elObjetoAAbrir instanceof Abrible)) {
             System.out.println("El " + nombreContenedor + " no se puede abrir");
             return;
         }
 
+        //se instancia una llave la cual corresponde a la que el jugador tiene en su inventario
         Llave llaveDelJugador = getLlaveInventario(jugador);
 
+        //se hace un cast al objeto a abrir (pues corresponde con un contenedor)
         Contenedor contenedor = (Contenedor) elObjetoAAbrir;
 
+        //si el codigo del contenedor es null se muestra su interior
         if (contenedor.getCodigo() == null) {
             System.out.println("Has abierto " + contenedor.getNombre() + ". Objetos contenidos:\n " + Arrays.toString(contenedor.getListaDeObjetosContenidos()));
             return;
         }
 
+        //se comprueba si el jugador tiene llave en su inventario
         if (llaveDelJugador == null) {
             System.out.println("No tienes llave en tu inventario");
             return;
         }
 
+        //se comprueba que los codigos sean iguales
         if (contenedor.getCodigo() != null && !contenedor.getCodigo().equalsIgnoreCase(llaveDelJugador.getCodigoDeSeguridad())) {
             System.out.println("El código de la llave que posees no es valido para " + contenedor.getNombre());
             return;
         }
 
+        //llegados aqui se han pasado todas las comprobaciones por lo que se muestra el contenido del contendor que tiene codigo
         System.out.println("Has abierto " + contenedor.getNombre() + " objetos contenidos:\n " + Arrays.toString(contenedor.getListaDeObjetosContenidos()));
     }
 
+    /**
+     * Metodo encargado de devolver la llave que el jugador posee en su inventario
+     *
+     * @param jugador el jugador del juego
+     * @return {@link Llave} si encuentra la llave o null en caso contrario
+     */
     private Llave getLlaveInventario(Jugador jugador) {
         for (int i = 0; i < jugador.getInventario().length; i++) {
             if (jugador.getInventario()[i] instanceof Llave) {
@@ -101,13 +124,30 @@ public class Juego {
      * @param jugador el jugador del juego
      */
     private void verInventario(Jugador jugador) {
-        System.out.println("Inventario: " + Arrays.toString(jugador.getInventario()));
+        for (int i = 0; i < jugador.getInventario().length; i++) {
+            if (jugador.getInventario()[i] != null) {
+                System.out.println(jugador.getInventario()[i]);
+            }
+        }
     }
 
+    /**
+     * Metodo encargado de mostrar en que habitacion se encuentra el jugador
+     *
+     * @param habitacion la habitacion en la que se encuentra el jugador
+     */
     private void mirar(Habitacion habitacion) {
         System.out.println("Te encuentras en " + habitacion.getNombre() + " y alrededor observas " + Arrays.toString(habitacion.getListaDeObjetos()));
     }
 
+    /**
+     * Metodo encargado de mostrar la descripcion del objeto que el jugador desea
+     *
+     * @param nombreDelObjetoAExaminar el objeto cuya descripcion desea conocer el jugador
+     * @param inventario               el inventario del jugador
+     * @param habitacion               la habitacion en la que se encuentra el jugador
+     * @return la descripcion del objeto
+     */
     private String examinar(String nombreDelObjetoAExaminar, Objeto[] inventario, Habitacion habitacion) {
         for (int i = 0; i < inventario.length; i++) {
             if (inventario[i] != null && inventario[i].getNombre().equalsIgnoreCase(nombreDelObjetoAExaminar)) {
@@ -115,9 +155,11 @@ public class Juego {
             }
         }
 
-        if (elObjetoEstaEnLaHabitacion(nombreDelObjetoAExaminar, habitacion) != null) {
-            if (elObjetoEstaEnLaHabitacion(nombreDelObjetoAExaminar, habitacion).getNombre().equalsIgnoreCase(nombreDelObjetoAExaminar)) {
-                return elObjetoEstaEnLaHabitacion(nombreDelObjetoAExaminar, habitacion).getDescripcion();
+        Objeto elObjetoEncontrado = getObjetoHabitacion(nombreDelObjetoAExaminar, habitacion);
+
+        if (elObjetoEncontrado != null) {
+            if (elObjetoEncontrado.getNombre().equalsIgnoreCase(nombreDelObjetoAExaminar)) {
+                return elObjetoEncontrado.getDescripcion();
             }
         }
 
@@ -163,13 +205,13 @@ public class Juego {
      * @param jugador               el {@link Jugador} de la partida
      */
     private void cogerObjeto(String nombreDelObjetoACoger, Habitacion habitacion, Jugador jugador) {
-        if (elObjetoEstaEnLaHabitacion(nombreDelObjetoACoger, habitacion) == null) { //se comprueba si el objeto devuelto es o no es null
+        //instaciamos un objeto que sera el que el jugador desea coger
+        Objeto objetoParaInventario = getObjetoHabitacion(nombreDelObjetoACoger, habitacion);
+
+        if (objetoParaInventario == null) { //se comprueba si el objeto devuelto es o no es null
             System.out.println("El objeto " + nombreDelObjetoACoger + " no se encuentra en el " + habitacion.getNombre());
             return;
         }
-
-        //si el metodo elObjetoEstaEnLaHabitacion devuelve el objeto deseado, se instancia en una nueva variable
-        Objeto objetoParaInventario = elObjetoEstaEnLaHabitacion(nombreDelObjetoACoger, habitacion);
 
         if (!esUnObjetoInventariable(objetoParaInventario)) { //se comprueba que el objeto sea Inventariable
             System.out.println("No puedes equipar el objeto " + objetoParaInventario.getNombre());
@@ -203,7 +245,7 @@ public class Juego {
      * @param habitacion            la habitacion en la que se encuentra el jugador
      * @return null si no se encontró el objeto, o, el objeto deseado en caso contrario
      */
-    private Objeto elObjetoEstaEnLaHabitacion(String nombreDelObjetoACoger, Habitacion habitacion) {
+    private Objeto getObjetoHabitacion(String nombreDelObjetoACoger, Habitacion habitacion) {
         for (int i = 0; i < habitacion.getListaDeObjetos().length; i++) {
             if (habitacion.getListaDeObjetos()[i] != null) {
                 if (habitacion.getListaDeObjetos()[i].getNombre().equalsIgnoreCase(nombreDelObjetoACoger)) {
@@ -262,33 +304,36 @@ public class Juego {
     //a partir de aquí empieza el código de la fase 2
     private void inicializarJuego() throws EntidadException {
 
-        //Listas de objetos que tiene cada habitacion
-        Latigo latigo = new Latigo("Latigo", "Cuerda larga para alcanzar objetos a largas distancias", true);
-        Hoz hoz = new Hoz("Hoz", "Herramienta agrícola para segar", false);
+        //instancias datos primera habitacion
+        Revolver revolver = new Revolver("Revolver", "Arma de fuego", 6, true);
+        Nota notaDeEscape = new Nota("Nota del escape", "Nota que contiene la pista para escapar", true, "En la intersección se encuentra la maquina del tiempo, busca detrás de aquello que te dió información al empezar");
+        Objeto[] listaObjetosCofreDelTesoroDelAlmacen = {notaDeEscape};
+        Contenedor cofreDelTesoro = new Contenedor("Cofre del tesoro", "Cofre que guarda el secreto a la salida", "1234", listaObjetosCofreDelTesoroDelAlmacen, true);
+        Objeto[] listaDeObjetosDelAlmacen = {revolver, cofreDelTesoro};
+        Habitacion almacen = new Habitacion("Almacén", "Esto es el almacen, una pequeña habitación pero con varios misterios alrededor", listaDeObjetosDelAlmacen);
+
+        //instancias datos segunda habitacion
         Palo palo = new Palo("Palo", "Instrumento de madera", true);
         Nota nota1 = new Nota("Nota 1", "Papel con información", true, "El caballo posee la herramienta, mas esta abre un tesoro en el origen");
         Objeto[] objetosEstanteria = {nota1, palo};
         Contenedor estanteria = new Contenedor("Estantería", "Mueble con capacidad para objetos", null, objetosEstanteria, true);
+        Mueble estatua = new Mueble("Estatua de Buda", "Monumento a la religion budista", true);
+        Objeto[] listaDeObjetosDelPasilloPrincipal = {estanteria, estatua};
+        Habitacion pasilloPrincipal = new Habitacion("Pasillo principal", "Esto es el pasillo principal, un pasillo largo y frío, tiene unas estanterías bastante llamativas", listaDeObjetosDelPasilloPrincipal);
+
+        //instancias datos tercera habitacion
+        Latigo latigo = new Latigo("Latigo", "Cuerda larga para alcanzar objetos a largas distancias", true);
+        Hoz hoz = new Hoz("Hoz", "Herramienta agrícola para segar", false);
         Objeto[] objetosCobertizo = {hoz};
         Contenedor cobertizo = new Contenedor("Cobertizo", "Espacio donde se guardan herramientas", null, objetosCobertizo, true);
-        Revolver revolver = new Revolver("Revolver", "Arma de fuego", 6, true);
         Llave llave = new Llave("Llave de Lucky Lucke", "Utensilio para abrir objetos", "1234", true);
         Objeto[] objetosAlforja = {llave};
-        Alforja alforja = new Alforja("Alforja", "Bolsas que se equipan a los caballos para guardar cosas", objetosAlforja, true);
-        Nota notaDeEscape = new Nota("Nota del escape", "Nota que contiene la pista para escapar", true, "En la intersección se encuentra la maquina del tiempo, busca detrás de aquello que te dió información al empezar");
-        Objeto[] listaObjetosContenedorAlmacen = {notaDeEscape};
-        Contenedor contenedor = new Contenedor("Cofre del tesoro", "Cofre que guarda el secreto a la salida", "1234", listaObjetosContenedorAlmacen, true);
-        Mueble estatua = new Mueble("Estatua de Buda", "Monumento a la religion budista", true);
-
-        Objeto[] listaDeObjetosDelAlmacen = {revolver, contenedor};
-        Objeto[] listaDeObjetosDelPasilloPrincipal = {estanteria, estatua};
+        Contenedor alforja = new Contenedor("Alforja", "Bolsas que equipan los caballos para guardar cosas", null, objetosAlforja, true);
         Objeto[] listaDeObjetosDelEstablo = {latigo, cobertizo, alforja,};
-
-        //habitaciones
-        Habitacion almacen = new Habitacion("Almacén", "Esto es el almacen, una pequeña habitación pero con varios misterios alrededor", listaDeObjetosDelAlmacen);
-        Habitacion pasilloPrincipal = new Habitacion("Pasillo principal", "Esto es el pasillo principal, un pasillo largo y frío, tiene unas estanterías bastante llamativas", listaDeObjetosDelPasilloPrincipal);
         Habitacion establo = new Habitacion("Establo", "Esto es el establo donde se encuentran el caballo de Lucky Lucke con una preciosa montura cuyas alforjas podrían tener algo", listaDeObjetosDelEstablo);
-        Habitacion habitaciones[] = {almacen, pasilloPrincipal, establo};
+
+        //instanciando array de habitaciones
+        Habitacion[] habitaciones = {almacen, pasilloPrincipal, establo};
 
         //instancia del jugador
         Jugador jugador = new Jugador();
@@ -302,6 +347,7 @@ public class Juego {
             } else if (respuesta.equalsIgnoreCase("Ir izquierda")) {
                 irALaIzquierda(jugador, habitaciones);
             } else if (respuesta.equalsIgnoreCase("Ver inventario")) {
+                System.out.println("Inventario: ");
                 verInventario(jugador);
             } else if (respuesta.equalsIgnoreCase("Coger objeto")) {
                 String objeto = MiEntradaSalida.leerCadena("Qué objeto deseas coger?");
@@ -314,6 +360,9 @@ public class Juego {
             } else if (respuesta.equalsIgnoreCase("Abrir")) {
                 String objetoAAbrir = MiEntradaSalida.leerCadena("¿Que quieres abrir?");
                 abrirContenedor(objetoAAbrir, habitaciones[jugador.getPosicion()], jugador);
+            } else if (respuesta.equalsIgnoreCase("Salir")) {
+                System.out.println("¡Gracias por jugar!");
+                probando = false;
             }
         }
 
