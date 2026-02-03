@@ -69,7 +69,7 @@ public class Juego {
             return;
         }
 
-        //se comprueba si es inventariable
+        //se comprueba si es abrible
         if (!(elObjetoAAbrir instanceof Abrible)) {
             System.out.println("El " + nombreContenedor + " no se puede abrir");
             return;
@@ -84,6 +84,13 @@ public class Juego {
         //si el codigo del contenedor es null se muestra su interior
         if (contenedor.getCodigo() == null) {
             System.out.println("Has abierto " + contenedor.getNombre() + ". Objetos contenidos:\n " + Arrays.toString(contenedor.getListaDeObjetosContenidos()));
+
+            for (int i = 0; i < contenedor.getListaDeObjetosContenidos().length; i++) {
+                jugador.addObjetoInventario(contenedor.getListaDeObjetosContenidos()[i]);
+            }
+
+            System.out.println("Se han guardado los objetos en el inventario");
+
             return;
         }
 
@@ -101,6 +108,14 @@ public class Juego {
 
         //llegados aqui se han pasado todas las comprobaciones por lo que se muestra el contenido del contendor que tiene codigo
         System.out.println("Has abierto " + contenedor.getNombre() + " objetos contenidos:\n " + Arrays.toString(contenedor.getListaDeObjetosContenidos()));
+
+        for (int i = 0; i < contenedor.getListaDeObjetosContenidos().length; i++) {
+            jugador.addObjetoInventario(contenedor.getListaDeObjetosContenidos()[i]);
+        }
+
+        System.out.println("Se han guardado los objetos en el inventario");
+
+
     }
 
     /**
@@ -111,8 +126,10 @@ public class Juego {
      */
     private Llave getLlaveInventario(Jugador jugador) {
         for (int i = 0; i < jugador.getInventario().length; i++) {
-            if (jugador.getInventario()[i] instanceof Llave) {
-                return (Llave) jugador.getInventario()[i];
+            if (jugador.getInventario()[i] != null) {
+                if (jugador.getInventario()[i] instanceof Llave llave) {
+                    return llave;
+                }
             }
         }
         return null;
@@ -151,6 +168,9 @@ public class Juego {
     private String examinar(String nombreDelObjetoAExaminar, Objeto[] inventario, Habitacion habitacion) {
         for (int i = 0; i < inventario.length; i++) {
             if (inventario[i] != null && inventario[i].getNombre().equalsIgnoreCase(nombreDelObjetoAExaminar)) {
+                if (inventario[i] instanceof Leible l) {
+                    l.leer();
+                }
                 return inventario[i].getDescripcion();
             }
         }
@@ -316,7 +336,7 @@ public class Juego {
         Palo palo = new Palo("Palo", "Instrumento de madera", true);
         Nota nota1 = new Nota("Nota 1", "Papel con información", true, "El caballo posee la herramienta, mas esta abre un tesoro en el origen");
         Objeto[] objetosEstanteria = {nota1, palo};
-        Contenedor estanteria = new Contenedor("Estantería", "Mueble con capacidad para objetos", null, objetosEstanteria, true);
+        Contenedor estanteria = new Contenedor("Estanteria", "Mueble con capacidad para objetos", null, objetosEstanteria, true);
         Mueble estatua = new Mueble("Estatua de Buda", "Monumento a la religion budista", true);
         Objeto[] listaDeObjetosDelPasilloPrincipal = {estanteria, estatua};
         Habitacion pasilloPrincipal = new Habitacion("Pasillo principal", "Esto es el pasillo principal, un pasillo largo y frío, tiene unas estanterías bastante llamativas", listaDeObjetosDelPasilloPrincipal);

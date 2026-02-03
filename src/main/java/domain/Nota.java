@@ -12,7 +12,7 @@ public class Nota extends Objeto implements Leible {
     }
 
     @Override
-    public String leer(String texto) {
+    public String leer() {
         return texto;
     }
 }
