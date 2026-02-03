@@ -28,4 +28,13 @@ public class Jugador {
     public void setInventario(Objeto[] inventario) {
         this.inventario = inventario;
     }
+
+    public void addObjetoInventario(Objeto o) {
+        for (int i = 0; i < inventario.length; i++) {
+            if (inventario[i] == null) {
+                inventario[i] = o;
+                return;
+            }
+        }
+    }
 }
