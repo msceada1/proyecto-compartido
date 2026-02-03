@@ -333,7 +333,7 @@ public class Juego {
         Habitacion establo = new Habitacion("Establo", "Esto es el establo donde se encuentran el caballo de Lucky Lucke con una preciosa montura cuyas alforjas podrían tener algo", listaDeObjetosDelEstablo);
 
         //instanciando array de habitaciones
-        Habitacion habitaciones[] = {almacen, pasilloPrincipal, establo};
+        Habitacion[] habitaciones = {almacen, pasilloPrincipal, establo};
 
         //instancia del jugador
         Jugador jugador = new Jugador();
