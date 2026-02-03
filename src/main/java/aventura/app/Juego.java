@@ -10,6 +10,7 @@ public class Juego {
 
     private static final int INDICE_PRIMERA_HABITACION = 0;
 
+
     public static void main(String[] args) {
 
         Juego juego = new Juego();
@@ -320,6 +321,14 @@ public class Juego {
             }
         }
     }
+
+
+    //private void combinar(Jugador jugador){
+        //verInventario(jugador);
+        //String nombreDeObjeto1 = MiEntradaSalida.leerCadena("¿Que objeto quieres combinar?");
+
+
+    //}
 
     //a partir de aquí empieza el código de la fase 2
     private void inicializarJuego() throws EntidadException {
