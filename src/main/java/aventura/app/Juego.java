@@ -420,6 +420,7 @@ public class Juego {
                         System.out.println(examinar(jugador.getInventario(), habitaciones[jugador.getPosicion()]));
                 case "abrir" -> abrirContenedor(habitaciones[jugador.getPosicion()], jugador);
                 case "salir" -> jugando = false;
+                case "leer" -> leer(jugador.getInventario());
             }
         }
 
