@@ -355,7 +355,52 @@ public class Juego {
         }
     }
 
+    /**
+     * Metodo que mueve los objetod que hay en el mapa
+     * @param habitacion la habitacion en la que se encuentra el jugador
+     * @param j el jugador de la partida
+     */
+    private void mover(Habitacion habitacion, Jugador j) {
+        String objetoAMover = MiEntradaSalida.leerCadena("¿Qué quieres mover?");
+        Objeto objetoHab = getObjetoHabitacion(objetoAMover, habitacion);
+        Nota notaEscape = (Nota) getObjetoInventario(j, "Nota de escape");
 
+        if (objetoHab == null) {
+            System.out.println("El objeto " + objetoAMover + " no se encuentra en " + habitacion.getNombre());
+            return;
+        }
+
+        if (!(objetoHab instanceof Movible)) {
+            System.out.println("No puedes mover " + objetoHab.getNombre());
+            return;
+        }
+
+        if (notaEscape != null) {
+            System.out.println("Has movido " + objetoHab.getNombre() + " ves la máquina del tiempo y vuelves a tu época." +
+                    "¡Enhorabuena por completar el juego!");
+            jugando = false;
+            return;
+        }
+
+        System.out.println("No puedes mover " + objetoHab.getNombre() + " necesitas una nota indicativa");
+        return;
+    }
+
+
+    /**
+     * Metodo que busca un objeto en el inventario del jugador
+     * @param j el jugador de la partida
+     * @param nombreObjeto el nombre del objeto que se desea devolver
+     * @return null si no encuentra el objeto o en caso contrario el {@link Objeto} deseado
+     */
+    private Objeto getObjetoInventario(Jugador j, String nombreObjeto) {
+        for (int i = 0; i < j.getInventario().length; i++) {
+            if (j.getInventario()[i] != null && j.getInventario()[i].getNombre().equalsIgnoreCase(nombreObjeto)) {
+                return j.getInventario()[i];
+            }
+        }
+        return null;
+    }
     //private void combinar(Jugador jugador){
     //verInventario(jugador);
     //String nombreDeObjeto1 = MiEntradaSalida.leerCadena("¿Que objeto quieres combinar?");
