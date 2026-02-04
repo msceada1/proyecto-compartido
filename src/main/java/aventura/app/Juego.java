@@ -377,7 +377,7 @@ public class Juego {
         Palo palo = new Palo("Palo", "Instrumento de madera", true);
         Nota nota1 = new Nota("Nota 1", "Papel con información", true, "El caballo posee la herramienta, mas esta abre un tesoro en el origen");
         Objeto[] objetosEstanteria = {nota1, palo};
-        Contenedor estanteria = new Contenedor("Estanteria", "Mueble con capacidad para objetos", null, objetosEstanteria, true);
+        Estanteria estanteria = new Estanteria("Estanteria", "Mueble con capacidad para objetos", null, objetosEstanteria, true);
         Mueble estatua = new Mueble("Estatua de Buda", "Monumento a la religion budista", true);
         Objeto[] listaDeObjetosDelPasilloPrincipal = {estanteria, estatua};
         Habitacion pasilloPrincipal = new Habitacion("Pasillo principal", "Esto es el pasillo principal, un pasillo largo y frío, tiene unas estanterías bastante llamativas", listaDeObjetosDelPasilloPrincipal);
