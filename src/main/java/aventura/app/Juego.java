@@ -329,8 +329,8 @@ public class Juego {
 
 
     //private void combinar(Jugador jugador){
-        //verInventario(jugador);
-        //String nombreDeObjeto1 = MiEntradaSalida.leerCadena("¿Que objeto quieres combinar?");
+    //verInventario(jugador);
+    //String nombreDeObjeto1 = MiEntradaSalida.leerCadena("¿Que objeto quieres combinar?");
 
 
     //}
