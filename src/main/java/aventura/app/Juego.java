@@ -179,9 +179,6 @@ public class Juego {
 
         for (int i = 0; i < inventario.length; i++) {
             if (inventario[i] != null && inventario[i].getNombre().equalsIgnoreCase(nombreDelObjetoAExaminar)) {
-                if (inventario[i] instanceof Leible l) {
-                    l.leer();
-                }
                 return inventario[i].getDescripcion();
             }
         }
