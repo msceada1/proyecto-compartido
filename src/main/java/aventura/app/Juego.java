@@ -345,7 +345,7 @@ public class Juego {
 
         //instancias datos primera habitacion
         Revolver revolver = new Revolver("Revolver", "Arma de fuego", 6, true);
-        Nota notaDeEscape = new Nota("Nota del escape", "Nota que contiene la pista para escapar", true, "En la intersección se encuentra la maquina del tiempo, busca detrás de aquello que te dió información al empezar");
+        Nota notaDeEscape = new Nota("Nota de escape", "Nota que contiene la pista para escapar", true, "En la intersección se encuentra la maquina del tiempo, busca detrás de aquello que te dió información al empezar");
         Objeto[] listaObjetosCofreDelTesoroDelAlmacen = {notaDeEscape};
         Contenedor cofreDelTesoro = new Contenedor("Cofre del tesoro", "Cofre que guarda el secreto a la salida", "1234", listaObjetosCofreDelTesoroDelAlmacen, true);
         Objeto[] listaDeObjetosDelAlmacen = {revolver, cofreDelTesoro};
