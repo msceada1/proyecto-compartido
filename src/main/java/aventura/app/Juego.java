@@ -59,6 +59,28 @@ public class Juego {
     }
 
     /**
+     * Metodo que devuelve el texto informativo que posee un objeto
+     *
+     * @param inventario el el inventario del jugador
+     */
+    private void leer(Objeto[] inventario) {
+        String objetoALeer = MiEntradaSalida.leerCadena("¿Qué quieres leer?");
+
+        for (int i = 0; i < inventario.length; i++) {
+            if (inventario[i] != null && inventario[i].getNombre().equalsIgnoreCase(objetoALeer)) {
+                if (inventario[i] instanceof Leible) {
+                    System.out.println(((Leible) inventario[i]).leer());
+                    return;
+                } else {
+                    System.out.println("El objeto " + inventario[i].getNombre() + " no se puede leer");
+                    return;
+                }
+            }
+        }
+        System.out.println("El objeto " + objetoALeer + " no se ha encontrado en el inventario");
+    }
+
+    /**
      * Metodo encargado de mostrar los objetos que se encuentran en el interior de un contenedor realizando
      * comprobaciones en base a unos criterios
      *
