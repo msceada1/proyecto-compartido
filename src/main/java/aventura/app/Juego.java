@@ -400,8 +400,6 @@ public class Juego {
         //instancia del jugador y comienzo de la eleccion de acciones
         Jugador jugador = new Jugador();
 
-        boolean jugando = true;
-
         System.out.println(descripcionJuego);
 
         while (jugando) {
