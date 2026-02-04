@@ -36,6 +36,7 @@ public class Juego {
     private void irALaDerecha(Jugador jugador, Habitacion[] habitaciones) {
         if (jugador.getPosicion() < habitaciones.length - 1) {
             jugador.setPosicion(jugador.getPosicion() + 1);
+            System.out.println("Te has movido al " + habitaciones[jugador.getPosicion()]);
         } else {
             System.out.println("No hay nada más allá del " + habitaciones[jugador.getPosicion()].getNombre());
         }
@@ -51,6 +52,7 @@ public class Juego {
     private void irALaIzquierda(Jugador jugador, Habitacion[] habitaciones) {
         if (jugador.getPosicion() > INDICE_PRIMERA_HABITACION) {
             jugador.setPosicion(jugador.getPosicion() - 1);
+            System.out.println("Te has movido al " + habitaciones[jugador.getPosicion()]);
         } else {
             System.out.println("A la izquierda del " + habitaciones[jugador.getPosicion()].getNombre() + " no hay nada");
         }
@@ -60,11 +62,12 @@ public class Juego {
      * Metodo encargado de mostrar los objetos que se encuentran en el interior de un contenedor realizando
      * comprobaciones en base a unos criterios
      *
-     * @param nombreContenedor el contenedo a abrir
-     * @param habitacion       la habitacion en la que se encuentra el jugador
-     * @param jugador          el {@link Jugador} de la partida
+     * @param habitacion la habitacion en la que se encuentra el jugador
+     * @param jugador    el {@link Jugador} de la partida
      */
-    private void abrirContenedor(String nombreContenedor, Habitacion habitacion, Jugador jugador) {
+    private void abrirContenedor(Habitacion habitacion, Jugador jugador) {
+        String nombreContenedor = MiEntradaSalida.leerCadena("¿Qué deseas abrir?");
+
         //se instancia un nuevo Objeto que es el que el jugador desea abrir
         Objeto elObjetoAAbrir = getObjetoHabitacion(nombreContenedor, habitacion);
 
@@ -146,6 +149,8 @@ public class Juego {
      * @param jugador el jugador del juego
      */
     private void verInventario(Jugador jugador) {
+        System.out.println("Inventario:");
+
         for (int i = 0; i < jugador.getInventario().length; i++) {
             if (jugador.getInventario()[i] != null) {
                 System.out.println(jugador.getInventario()[i]);
@@ -165,12 +170,13 @@ public class Juego {
     /**
      * Metodo encargado de mostrar la descripcion del objeto que el jugador desea
      *
-     * @param nombreDelObjetoAExaminar el objeto cuya descripcion desea conocer el jugador
-     * @param inventario               el inventario del jugador
-     * @param habitacion               la habitacion en la que se encuentra el jugador
+     * @param inventario el inventario del jugador
+     * @param habitacion la habitacion en la que se encuentra el jugador
      * @return la descripcion del objeto
      */
-    private String examinar(String nombreDelObjetoAExaminar, Objeto[] inventario, Habitacion habitacion) {
+    private String examinar(Objeto[] inventario, Habitacion habitacion) {
+        String nombreDelObjetoAExaminar = MiEntradaSalida.leerCadena("¿Qué objeto deseas examinar?");
+
         for (int i = 0; i < inventario.length; i++) {
             if (inventario[i] != null && inventario[i].getNombre().equalsIgnoreCase(nombreDelObjetoAExaminar)) {
                 if (inventario[i] instanceof Leible l) {
@@ -226,12 +232,14 @@ public class Juego {
      * Metodo que se encarga de añadir el objeto al inventario del jugador de la partida realizando llamadas a otros
      * metodos para comprobar los requisitos necesarios
      *
-     * @param nombreDelObjetoACoger el nombre del {@link Objeto} que el jugador quiere añadir a su inventario
-     * @param habitacion            la {@link Habitacion}  en la que se encuentra el jugador
-     * @param jugador               el {@link Jugador} de la partida
+     * @param habitacion la {@link Habitacion}  en la que se encuentra el jugador
+     * @param jugador    el {@link Jugador} de la partida
      */
-    private void cogerObjeto(String nombreDelObjetoACoger, Habitacion habitacion, Jugador jugador) {
+    private void cogerObjeto(Habitacion habitacion, Jugador jugador) {
         //instaciamos un objeto que sera el que el jugador desea coger
+
+        String nombreDelObjetoACoger = MiEntradaSalida.leerCadena("¿Qué objeto deseas coger?");
+
         Objeto objetoParaInventario = getObjetoHabitacion(nombreDelObjetoACoger, habitacion);
 
         if (objetoParaInventario == null) { //se comprueba si el objeto devuelto es o no es null
@@ -369,36 +377,32 @@ public class Juego {
         //instanciando array de habitaciones
         Habitacion[] habitaciones = {almacen, pasilloPrincipal, establo};
 
-        //instancia del jugador
+        //instancia del jugador y comienzo de la eleccion de acciones
         Jugador jugador = new Jugador();
 
-        boolean probando = true;
-        while (probando) {
-            String respuesta = MiEntradaSalida.leerCadena("Que accion deseas realizar?");
+        boolean jugando = true;
 
-            if (respuesta.equalsIgnoreCase("Ir derecha")) {
-                irALaDerecha(jugador, habitaciones);
-            } else if (respuesta.equalsIgnoreCase("Ir izquierda")) {
-                irALaIzquierda(jugador, habitaciones);
-            } else if (respuesta.equalsIgnoreCase("Ver inventario")) {
-                System.out.println("Inventario: ");
-                verInventario(jugador);
-            } else if (respuesta.equalsIgnoreCase("Coger objeto")) {
-                String objeto = MiEntradaSalida.leerCadena("Qué objeto deseas coger?");
-                cogerObjeto(objeto, habitaciones[jugador.getPosicion()], jugador);
-            } else if (respuesta.equalsIgnoreCase("Mirar")) {
-                mirar(habitaciones[jugador.getPosicion()]);
-            } else if (respuesta.equalsIgnoreCase("Examinar")) {
-                String objetoAExaminar = MiEntradaSalida.leerCadena("¿Que objeto deseas examinar?");
-                System.out.println(examinar(objetoAExaminar, jugador.getInventario(), habitaciones[jugador.getPosicion()]));
-            } else if (respuesta.equalsIgnoreCase("Abrir")) {
-                String objetoAAbrir = MiEntradaSalida.leerCadena("¿Que quieres abrir?");
-                abrirContenedor(objetoAAbrir, habitaciones[jugador.getPosicion()], jugador);
-            } else if (respuesta.equalsIgnoreCase("Salir")) {
-                System.out.println("¡Gracias por jugar!");
-                probando = false;
+        System.out.println(descripcionJuego);
+
+        while (jugando) {
+            String comandoIntroducido = MiEntradaSalida.leerCadena("¿Qué acción deseas realizar?");
+            while (!comandoValido(comandoIntroducido, comandos())) {
+                comandoIntroducido = MiEntradaSalida.leerCadena("Has introducido un comando incorrecto, prueba de nuevo.");
+            }
+
+            switch (comandoIntroducido) {
+                case "ayuda" -> System.out.println(Arrays.toString(comandos()));
+                case "mirar" -> mirar(habitaciones[jugador.getPosicion()]);
+                case "inventario" -> verInventario(jugador);
+                case "ir izquierda" -> irALaIzquierda(jugador, habitaciones);
+                case "ir derecha" -> irALaDerecha(jugador, habitaciones);
+                case "coger objeto" -> cogerObjeto(habitaciones[jugador.getPosicion()], jugador);
+                case "examinar" -> examinar(jugador.getInventario(), habitaciones[jugador.getPosicion()]);
+                case "abrir" -> abrirContenedor(habitaciones[jugador.getPosicion()], jugador);
+                case "salir" -> jugando = false;
             }
         }
 
+        System.out.println("¡Gracias por jugar!");
     }
 }
