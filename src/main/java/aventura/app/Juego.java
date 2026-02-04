@@ -9,6 +9,7 @@ import java.util.Arrays;
 public class Juego {
 
     private static final int INDICE_PRIMERA_HABITACION = 0;
+    static boolean jugando = true; //variable que mantendra la partida en ejecucion
 
 
     public static void main(String[] args) {
@@ -224,7 +225,7 @@ public class Juego {
     private static String[] comandos() {
 
         String[] comandos = {"ayuda", "mirar", "ir izquierda", "ir derecha", "inventario", "coger objeto", "salir", "abrir",
-                "examinar", "combinar", "leer"};
+                "examinar", "combinar", "leer", "mover"};
 
         return comandos;
     }
@@ -354,7 +355,52 @@ public class Juego {
         }
     }
 
+    /**
+     * Metodo que mueve los objetod que hay en el mapa
+     * @param habitacion la habitacion en la que se encuentra el jugador
+     * @param j el jugador de la partida
+     */
+    private void mover(Habitacion habitacion, Jugador j) {
+        String objetoAMover = MiEntradaSalida.leerCadena("¿Qué quieres mover?");
+        Objeto objetoHab = getObjetoHabitacion(objetoAMover, habitacion);
+        Nota notaEscape = (Nota) getObjetoInventario(j, "Nota de escape");
 
+        if (objetoHab == null) {
+            System.out.println("El objeto " + objetoAMover + " no se encuentra en " + habitacion.getNombre());
+            return;
+        }
+
+        if (!(objetoHab instanceof Movible)) {
+            System.out.println("No puedes mover " + objetoHab.getNombre());
+            return;
+        }
+
+        if (notaEscape != null) {
+            System.out.println("Has movido " + objetoHab.getNombre() + " ves la máquina del tiempo y vuelves a tu época." +
+                    "¡Enhorabuena por completar el juego!");
+            jugando = false;
+            return;
+        }
+
+        System.out.println("No puedes mover " + objetoHab.getNombre() + " necesitas una nota indicativa");
+        return;
+    }
+
+
+    /**
+     * Metodo que busca un objeto en el inventario del jugador
+     * @param j el jugador de la partida
+     * @param nombreObjeto el nombre del objeto que se desea devolver
+     * @return null si no encuentra el objeto o en caso contrario el {@link Objeto} deseado
+     */
+    private Objeto getObjetoInventario(Jugador j, String nombreObjeto) {
+        for (int i = 0; i < j.getInventario().length; i++) {
+            if (j.getInventario()[i] != null && j.getInventario()[i].getNombre().equalsIgnoreCase(nombreObjeto)) {
+                return j.getInventario()[i];
+            }
+        }
+        return null;
+    }
     //private void combinar(Jugador jugador){
     //verInventario(jugador);
     //String nombreDeObjeto1 = MiEntradaSalida.leerCadena("¿Que objeto quieres combinar?");
@@ -377,7 +423,7 @@ public class Juego {
         Palo palo = new Palo("Palo", "Instrumento de madera", true);
         Nota nota1 = new Nota("Nota 1", "Papel con información", true, "El caballo posee la herramienta, mas esta abre un tesoro en el origen");
         Objeto[] objetosEstanteria = {nota1, palo};
-        Contenedor estanteria = new Contenedor("Estanteria", "Mueble con capacidad para objetos", null, objetosEstanteria, true);
+        Estanteria estanteria = new Estanteria("Estanteria", "Mueble con capacidad para objetos", null, objetosEstanteria, true);
         Mueble estatua = new Mueble("Estatua de Buda", "Monumento a la religion budista", true);
         Objeto[] listaDeObjetosDelPasilloPrincipal = {estanteria, estatua};
         Habitacion pasilloPrincipal = new Habitacion("Pasillo principal", "Esto es el pasillo principal, un pasillo largo y frío, tiene unas estanterías bastante llamativas", listaDeObjetosDelPasilloPrincipal);
@@ -399,8 +445,6 @@ public class Juego {
         //instancia del jugador y comienzo de la eleccion de acciones
         Jugador jugador = new Jugador();
 
-        boolean jugando = true;
-
         System.out.println(descripcionJuego);
 
         while (jugando) {
@@ -421,6 +465,7 @@ public class Juego {
                 case "abrir" -> abrirContenedor(habitaciones[jugador.getPosicion()], jugador);
                 case "salir" -> jugando = false;
                 case "leer" -> leer(jugador.getInventario());
+                case "mover" -> mover(habitaciones[jugador.getPosicion()], jugador);
             }
         }
 
