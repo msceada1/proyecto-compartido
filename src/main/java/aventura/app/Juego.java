@@ -420,6 +420,7 @@ public class Juego {
                 case "abrir" -> abrirContenedor(habitaciones[jugador.getPosicion()], jugador);
                 case "salir" -> jugando = false;
                 case "leer" -> leer(jugador.getInventario());
+                case "mover" -> mover(habitaciones[jugador.getPosicion()], jugador);
             }
         }
 
