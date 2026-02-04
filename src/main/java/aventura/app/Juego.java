@@ -397,7 +397,8 @@ public class Juego {
                 case "ir izquierda" -> irALaIzquierda(jugador, habitaciones);
                 case "ir derecha" -> irALaDerecha(jugador, habitaciones);
                 case "coger objeto" -> cogerObjeto(habitaciones[jugador.getPosicion()], jugador);
-                case "examinar" -> examinar(jugador.getInventario(), habitaciones[jugador.getPosicion()]);
+                case "examinar" ->
+                        System.out.println(examinar(jugador.getInventario(), habitaciones[jugador.getPosicion()]));
                 case "abrir" -> abrirContenedor(habitaciones[jugador.getPosicion()], jugador);
                 case "salir" -> jugando = false;
             }
