@@ -1,6 +1,7 @@
 package aventura.app;
 
 import domain.*;
+import exceptions.CombinarException;
 import exceptions.EntidadException;
 import io.MiEntradaSalida;
 
@@ -357,8 +358,9 @@ public class Juego {
 
     /**
      * Metodo que mueve los objetod que hay en el mapa
+     *
      * @param habitacion la habitacion en la que se encuentra el jugador
-     * @param j el jugador de la partida
+     * @param j          el jugador de la partida
      */
     private void mover(Habitacion habitacion, Jugador j) {
         String objetoAMover = MiEntradaSalida.leerCadena("¿Qué quieres mover?");
@@ -389,7 +391,8 @@ public class Juego {
 
     /**
      * Metodo que busca un objeto en el inventario del jugador
-     * @param j el jugador de la partida
+     *
+     * @param j            el jugador de la partida
      * @param nombreObjeto el nombre del objeto que se desea devolver
      * @return null si no encuentra el objeto o en caso contrario el {@link Objeto} deseado
      */
@@ -401,12 +404,41 @@ public class Juego {
         }
         return null;
     }
-    //private void combinar(Jugador jugador){
-    //verInventario(jugador);
-    //String nombreDeObjeto1 = MiEntradaSalida.leerCadena("¿Que objeto quieres combinar?");
 
+    private void combinar(Jugador j) throws EntidadException, CombinarException {
+        String objeto1 = MiEntradaSalida.leerCadena("¿Qué objeto quieres combinar?");
+        Objeto objetoACombinar1 = getObjetoInventario(j, objeto1);
 
-    //}
+        if (objetoACombinar1 == null) {
+            System.out.println("No posees " + objeto1 + " en tu inventario");
+            return;
+        }
+
+        if (!(objetoACombinar1 instanceof Combinable)) {
+            System.out.println("El objeto " + objetoACombinar1.getNombre() + " no se puede combinar con nada");
+            return;
+        }
+
+        String objeto2 = MiEntradaSalida.leerCadena("¿Con que objeto quieres combinar " + objetoACombinar1.getNombre() + "?");
+        Objeto objetoACombinar2 = getObjetoInventario(j, objeto2);
+
+        if (objetoACombinar2 == null) {
+            System.out.println("No posees " + objeto2 + " en tu inventario");
+            return;
+        }
+
+        if (!(objetoACombinar2 instanceof Combinable)) {
+            System.out.println("El objeto " + objetoACombinar2.getNombre() + " no se puede combinar con nada");
+        }
+
+        //una vez llegados aquí significa que se han pasado las comprobaciones. Por tanto los objetos son combinables
+
+        Guadania guadaniaOriginada = (Guadania) ((Combinable) objetoACombinar1).combinar(objetoACombinar2);
+
+        j.addObjetoInventario(guadaniaOriginada);
+
+        System.out.println("Se ha añadido " + guadaniaOriginada.getNombre() + " al inventario");
+    }
 
     //a partir de aquí empieza el código de la fase 2
     private void inicializarJuego() throws EntidadException {
@@ -466,6 +498,13 @@ public class Juego {
                 case "salir" -> jugando = false;
                 case "leer" -> leer(jugador.getInventario());
                 case "mover" -> mover(habitaciones[jugador.getPosicion()], jugador);
+                case "combinar" -> {
+                    try {
+                        combinar(jugador);
+                    } catch (CombinarException e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
             }
         }
 
