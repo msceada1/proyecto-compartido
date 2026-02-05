@@ -229,8 +229,8 @@ public class Juego {
      */
     private static String[] comandos() {
 
-        String[] comandos = {"ayuda", "mirar", "ir izquierda", "ir derecha", "inventario", "coger objeto", "salir", "abrir",
-                "examinar", "combinar", "leer", "mover", "combinar"};
+        String[] comandos = {"Ayuda", "Mirar", "Ir izquierda", "Ir derecha", "Inventario", "Coger objeto", "Salir", "Abrir",
+                "Examinar", "Combinar", "Leer", "Mover", "Combinar"};
 
         return comandos;
     }
@@ -496,10 +496,10 @@ public class Juego {
 
         while (jugando) {
             System.out.println(Arrays.toString(comandos()));
-            String comandoIntroducido = MiEntradaSalida.leerCadena("¿Qué acción deseas realizar?");
+            String comandoIntroducido = MiEntradaSalida.leerCadena("¿Qué acción deseas realizar?").trim().toLowerCase();
             while (!comandoValido(comandoIntroducido, comandos())) {
                 System.out.println(Arrays.toString(comandos()));
-                comandoIntroducido = MiEntradaSalida.leerCadena("Has introducido un comando incorrecto, prueba de nuevo.");
+                comandoIntroducido = MiEntradaSalida.leerCadena("Has introducido un comando incorrecto, prueba de nuevo.").trim().toLowerCase();
             }
 
             switch (comandoIntroducido) {
