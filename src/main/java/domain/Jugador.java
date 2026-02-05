@@ -31,6 +31,7 @@ public class Jugador {
 
     /**
      * Metodo encargado de añadir un objeto al inventario
+     *
      * @param o el objeto qye se desea añadir al inventario
      */
     public void addObjetoInventario(Objeto o) {
@@ -42,6 +43,11 @@ public class Jugador {
         }
     }
 
+    /**
+     * Metodo encargado de eliminar un objeto del inventario
+     *
+     * @param objetoAEliminar el objeto que se desea eliminar del inventario
+     */
     public void eliminarObjetoInventario(Objeto objetoAEliminar) {
         for (int i = 0; i < inventario.length; i++) {
             if (inventario[i] != null && inventario[i].getNombre().equalsIgnoreCase(String.valueOf(objetoAEliminar))) {
