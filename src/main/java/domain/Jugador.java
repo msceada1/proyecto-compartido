@@ -29,6 +29,10 @@ public class Jugador {
         this.inventario = inventario;
     }
 
+    /**
+     * Metodo encargado de añadir un objeto al inventario
+     * @param o el objeto qye se desea añadir al inventario
+     */
     public void addObjetoInventario(Objeto o) {
         for (int i = 0; i < inventario.length; i++) {
             if (inventario[i] == null) {
