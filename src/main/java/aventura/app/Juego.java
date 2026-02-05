@@ -436,6 +436,8 @@ public class Juego {
         Guadania guadaniaOriginada = (Guadania) ((Combinable) objetoACombinar1).combinar(objetoACombinar2);
 
         j.addObjetoInventario(guadaniaOriginada);
+        j.eliminarObjetoInventario(objetoACombinar1);
+        j.eliminarObjetoInventario(objetoACombinar2);
 
         System.out.println("Se ha añadido " + guadaniaOriginada.getNombre() + " al inventario");
     }
