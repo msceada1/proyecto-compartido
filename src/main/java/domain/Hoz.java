@@ -1,5 +1,6 @@
 package domain;
 
+import exceptions.CombinarException;
 import exceptions.EntidadException;
 
 public class Hoz extends Objeto implements Combinable {
@@ -9,7 +10,7 @@ public class Hoz extends Objeto implements Combinable {
     }
 
     @Override
-    public Objeto combinar(Objeto objetoACombinar) throws EntidadException {
+    public Objeto combinar(Objeto objetoACombinar) throws EntidadException, CombinarException {
         if (objetoACombinar != null) {
             if (objetoACombinar instanceof Palo p) {
                 Objeto aux = p.combinar(this);

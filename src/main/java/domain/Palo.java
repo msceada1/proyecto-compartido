@@ -1,5 +1,6 @@
 package domain;
 
+import exceptions.CombinarException;
 import exceptions.EntidadException;
 
 public class Palo extends Objeto implements Combinable {
@@ -9,9 +10,9 @@ public class Palo extends Objeto implements Combinable {
     }
 
     @Override
-    public Objeto combinar(Objeto objetoACombinar) throws EntidadException {
+    public Objeto combinar(Objeto objetoACombinar) throws CombinarException, EntidadException {
         if (!(objetoACombinar instanceof Combinable)){
-            throw new EntidadException("No se pueden combinar los objetos");
+            throw new CombinarException("No se pueden combinar los objetos");
         }
         return new Guadania("Guadania", "Resultado de haber combinando una hoz y un palo",true);
     }
