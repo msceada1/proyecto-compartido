@@ -42,6 +42,7 @@ public class Jugador {
         for (int i = 0; i < inventario.length; i++) {
             if (inventario[i] != null && inventario[i].getNombre().equalsIgnoreCase(String.valueOf(objetoAEliminar))) {
                 inventario[i] = null;
+                return;
             }
         }
     }
