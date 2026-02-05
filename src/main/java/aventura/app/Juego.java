@@ -405,6 +405,14 @@ public class Juego {
         return null;
     }
 
+    /**
+     * Metodo encargado de combinar dos objetos en uno, elminando los combinados del inevntario y dejando
+     * solo el resultante
+     *
+     * @param j el jugador del juego
+     * @throws EntidadException  excepcion heredera de clases padres
+     * @throws CombinarException si los objetos no se pueden combinar
+     */
     private void combinar(Jugador j) throws EntidadException, CombinarException {
         String objeto1 = MiEntradaSalida.leerCadena("¿Qué objeto quieres combinar?");
         Objeto objetoACombinar1 = getObjetoInventario(j, objeto1);
@@ -435,6 +443,7 @@ public class Juego {
 
         Guadania guadaniaOriginada = (Guadania) ((Combinable) objetoACombinar1).combinar(objetoACombinar2);
 
+        //se añade el objeto resultante al inventario y se eliminan los combinados
         j.addObjetoInventario(guadaniaOriginada);
         j.eliminarObjetoInventario(objetoACombinar1);
         j.eliminarObjetoInventario(objetoACombinar2);
