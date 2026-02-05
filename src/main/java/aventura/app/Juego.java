@@ -495,8 +495,10 @@ public class Juego {
         System.out.println(descripcionJuego);
 
         while (jugando) {
+            System.out.println(Arrays.toString(comandos()));
             String comandoIntroducido = MiEntradaSalida.leerCadena("¿Qué acción deseas realizar?");
             while (!comandoValido(comandoIntroducido, comandos())) {
+                System.out.println(Arrays.toString(comandos()));
                 comandoIntroducido = MiEntradaSalida.leerCadena("Has introducido un comando incorrecto, prueba de nuevo.");
             }
 
