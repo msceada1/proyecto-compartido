@@ -225,7 +225,7 @@ public class Juego {
     private static String[] comandos() {
 
         String[] comandos = {"ayuda", "mirar", "ir izquierda", "ir derecha", "inventario", "coger objeto", "salir", "abrir",
-                "examinar", "combinar", "leer", "mover"};
+                "examinar", "combinar", "leer", "mover", "combinar"};
 
         return comandos;
     }
