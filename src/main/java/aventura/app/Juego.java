@@ -121,6 +121,8 @@ public class Juego {
                 jugador.addObjetoInventario(contenedor.getListaDeObjetosContenidos()[i]);
             }
 
+            contenedor.eliminarObjetos();
+
             System.out.println("Se han guardado los objetos en el inventario");
 
             return;
@@ -144,6 +146,8 @@ public class Juego {
         for (int i = 0; i < contenedor.getListaDeObjetosContenidos().length; i++) {
             jugador.addObjetoInventario(contenedor.getListaDeObjetosContenidos()[i]);
         }
+
+        contenedor.eliminarObjetos();
 
         System.out.println("Se han guardado los objetos en el inventario");
 
