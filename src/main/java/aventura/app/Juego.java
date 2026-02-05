@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class Juego {
 
     private static final int INDICE_PRIMERA_HABITACION = 0;
-    static boolean jugando = true; //variable que mantendra la partida en ejecucion
+    boolean jugando = true; //variable que mantendra la partida en ejecucion
 
 
     public static void main(String[] args) {
