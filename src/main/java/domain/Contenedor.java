@@ -52,4 +52,12 @@ public class Contenedor extends Objeto implements Abrible {
 
         return new RespuestaAccion(false, "No puedes abrir el " + getNombre() + " algo falla");
     }
+
+    public void eliminarObjetos() {
+        for (int i = 0; i < listaDeObjetosContenidos.length; i++) {
+            if (listaDeObjetosContenidos[i] != null) {
+                listaDeObjetosContenidos[i] = null;
+            }
+        }
+    }
 }
