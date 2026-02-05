@@ -24,9 +24,9 @@ public class Juego {
         }
     }
 
-    private static String descripcionJuego = "Estas en clase y el profesor te manda a hacer una fotocopia. \n" +
-            "Pero de repente pulsas el boton de imprimir y resultaba ser una maquina del tiempo. \n" +
-            "Y has despertado en un almacen lleno de cajas en las epoca del lejano oeste.";
+    private static String descripcionJuego = "Estás en clase y el profesor te manda a hacer unas fotocopias, \n" +
+            "pero pulsas el botón de imprimir y resulta que la impresora es una máquina del tiempo. \n" +
+            "Has despertado en un almacén lleno de cajas en la época del lejano oeste.";
 
     /**
      * Metodo que mueve al jugador a la derecha (controlando que no esté en el limite)
