@@ -2,18 +2,26 @@ package aventura.domain;
 
 import aventura.exceptions.AventuraException;
 
+import java.util.List;
+import java.util.Map;
+
 public class Habitacion {
     private static final int MAX_OBJETOS = 5;
+    private String nombre;
     private String descripcion;
-    private Objeto[] objetos; // Array de objetos reales, no Strings
+    private List<Objeto> objetos; // Lista de objetos reales, no Strings
+    private Map<String, String> salidas;
 
     /**
-     * Constructor de la clase Habitacion.
-     * @param desc Descripción de la habitación.
+     * Constructor de la clase habitacion
+     * @param nombre el nombre de la habitacion
+     * @param descripcion la descripcion de la habitacion
+     * @param objetos los objetos de la habitacion
      */
-    public Habitacion(String desc) {
-        this.descripcion = desc;
-        this.objetos = new Objeto[MAX_OBJETOS];
+    public Habitacion(String nombre, String descripcion, List<Objeto> objetos) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.objetos = objetos;
     }
 
     /**
