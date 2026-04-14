@@ -60,16 +60,8 @@ public class Habitacion {
      * @throws AventuraException Si no se puede agregar el objeto.
      */
     public void agregarObjeto(Objeto obj) throws AventuraException {
-        // Lógica para añadir en el primer hueco null
-        boolean added = false;
-        for (int i = 0; i < objetos.length; i++) {
-            if (objetos[i] == null) {
-                objetos[i] = obj;
-                return;
-            }
-        }
-        if (!added) {
-            throw new AventuraException("No se puede agregar un objeto");
+        if (!objetos.add(obj)) {
+            throw new AventuraException("No puedes añadir el objeto " + obj.getNombre() + " a " + getNombre());
         }
     }
 
@@ -79,15 +71,10 @@ public class Habitacion {
      * @param obj Objeto a eliminar.
      * @return true si se eliminó el objeto, false si no se encontró.
      */
-    public boolean eliminarObjeto(Objeto obj) {
-        for (int i = 0; i < objetos.length; i++) {
-            if (objetos[i] != null && objetos[i].equals(obj)) {
-                objetos[i] = null;
-                return true;
-            }
+    public void eliminarObjeto(Objeto obj) throws AventuraException {
+        if (!objetos.remove(obj)) {
+            throw new AventuraException("No se puede eliminar el objeto" + obj.getNombre() + " de " + getNombre());
         }
-
-        return false;
     }
 
     /**
