@@ -83,7 +83,7 @@ public class Juego {
 
 
     public static void main(String[] args) {
-        Juego juego = new Juego(new Jugador("Jugador1"));
+        Juego juego = new Juego(new Jugador("Jugador1", "H1"));
         juego.iniciar();
 
         System.out.println("¡Gracias por jugar!");
