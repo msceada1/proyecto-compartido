@@ -22,7 +22,7 @@ public class Habitacion {
     public Habitacion(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.objetos = new ArrayList<>();
+        this.objetos = new ArrayList<>(MAX_OBJETOS);
     }
 
     /**
