@@ -25,6 +25,34 @@ public class Habitacion {
         this.objetos = new ArrayList<>(MAX_OBJETOS);
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setObjetos(List<Objeto> objetos) {
+        this.objetos = objetos;
+    }
+
+    public Map<String, String> getSalidas() {
+        return salidas;
+    }
+
+    public void setSalidas(Map<String, String> salidas) {
+        this.salidas = salidas;
+    }
+
     /**
      * Agrega un objeto a la habitación.
      *
