@@ -2,6 +2,7 @@ package aventura.domain;
 
 import aventura.exceptions.AventuraException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,43 +15,45 @@ public class Habitacion {
 
     /**
      * Constructor de la clase habitacion
-     * @param nombre el nombre de la habitacion
+     *
+     * @param nombre      el nombre de la habitacion
      * @param descripcion la descripcion de la habitacion
-     * @param objetos los objetos de la habitacion
      */
-    public Habitacion(String nombre, String descripcion, List<Objeto> objetos) {
+    public Habitacion(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.objetos = objetos;
+        this.objetos = new ArrayList<>();
     }
 
     /**
      * Agrega un objeto a la habitación.
+     *
      * @param obj Objeto a agregar.
      * @throws AventuraException Si no se puede agregar el objeto.
      */
     public void agregarObjeto(Objeto obj) throws AventuraException {
         // Lógica para añadir en el primer hueco null
         boolean added = false;
-        for(int i = 0; i < objetos.length; i++) {
-            if(objetos[i] == null) {
+        for (int i = 0; i < objetos.length; i++) {
+            if (objetos[i] == null) {
                 objetos[i] = obj;
                 return;
             }
         }
-        if(!added) {
+        if (!added) {
             throw new AventuraException("No se puede agregar un objeto");
         }
     }
 
     /**
      * Elimina un objeto de la habitación.
+     *
      * @param obj Objeto a eliminar.
      * @return true si se eliminó el objeto, false si no se encontró.
      */
     public boolean eliminarObjeto(Objeto obj) {
-        for(int i = 0; i < objetos.length; i++) {
-            if(objetos[i] != null && objetos[i].equals(obj)) {
+        for (int i = 0; i < objetos.length; i++) {
+            if (objetos[i] != null && objetos[i].equals(obj)) {
                 objetos[i] = null;
                 return true;
             }
@@ -61,13 +64,14 @@ public class Habitacion {
 
     /**
      * Muestra la descripción de la habitación y los objetos presentes en ella.
+     *
      * @return Descripción de la habitación y lista de objetos.
      */
     public String mirar() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.descripcion).append("\n");
-        for(Objeto obj : objetos) {
-            if(obj != null) {
+        for (Objeto obj : objetos) {
+            if (obj != null) {
                 sb.append(" - ").append(obj.getNombre()).append("\n");
             }
         }
@@ -76,6 +80,7 @@ public class Habitacion {
 
     /**
      * Obtiene los objetos presentes en la habitación.
+     *
      * @return Array de objetos en la habitación.
      */
     public Objeto[] getObjetos() {
@@ -84,6 +89,7 @@ public class Habitacion {
 
     /**
      * Busca un objeto por su nombre en la habitación.
+     *
      * @param nombre Nombre del objeto a buscar.
      * @return El objeto si se encuentra, null en caso contrario.
      */
