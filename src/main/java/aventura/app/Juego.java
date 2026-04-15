@@ -6,6 +6,7 @@ import aventura.exceptions.InventarioLlenoException;
 import aventura.exceptions.ObjetoNoCompatibleException;
 import aventura.io.MiEntradaSalida;
 
+import java.util.Arrays;
 import java.util.Locale;
 
 /**
@@ -50,7 +51,7 @@ public class Juego {
                 "Pero algo pasó. Lo último que recuerdas es que sentiste mucho frío y todo se volvió oscuro. Ahora estás en tu clase, pero es de noche y el instituto está cerrado." +
                 "¿Nadie te ha visto? ¿Por qué las limpiadoras no te han despertado?";
         //Cremos el escenario
-        Habitacion aula103 = new Habitacion("El aula 103. Es tu aula habitual. Hay una puerta a la DERECHA.");
+        Habitacion aula103 = new Habitacion("El aula 103", "Es tu aula habitual");
         try {
             aula103.agregarObjeto(new Mueble("Estantería", "Una estantería llena de libros y cuadernos.", true));
             aula103.agregarObjeto(new Item("Llave", "Una llave pequeña de metal.", true));
@@ -60,7 +61,7 @@ public class Juego {
             System.err.println("Error al agregar objeto a la habitación: " + e.getMessage());
         }
 
-        Habitacion pasillo = new Habitacion("El pasillo principal. Hay puertas a la DERECHA y a la IZQUIERDA.");
+        Habitacion pasillo = new Habitacion("El pasillo principal.", "El lugar que lo une todo");
         try {
             pasillo.agregarObjeto(new Contenedor("Taquilla", "Una taquilla metálica cerrada.", true, "LLAVE123", new PaloRotoLlave()));
             habitaciones[1] = pasillo;
@@ -68,7 +69,7 @@ public class Juego {
             System.err.println("Error al agregar objeto a la habitación: " + e.getMessage());
         }
 
-        Habitacion aula105 = new Habitacion("El aula 105. Hay una puerta a la IZQUIERDA por la que has entrado.");
+        Habitacion aula105 = new Habitacion("El aula 105.","El aula mas alejada y siniestra");
         try {
             aula105.agregarObjeto(new Nota("Nota", "Una nota escrita a mano", true, "La llave está bajo la estantería."));
             aula105.agregarObjeto(new Mueble("Escritorio", "Un escritorio con varios papeles encima.", true));
@@ -313,12 +314,12 @@ public class Juego {
         assert objetoACoger != null : "El objeto a coger no puede ser null";
 
         boolean objetoEncontrado = false;
-        for (int i = 0; i < getHabitacionActual().getObjetos().length && !objetoEncontrado; i++) {
-            if (objetoACoger.equals(getHabitacionActual().getObjetos()[i])) {
+        for (int i = 0; i < getHabitacionActual().getObjetos().size() && !objetoEncontrado; i++) {
+            if (objetoACoger.equals(getHabitacionActual().getObjetos().get(i))) {
                 try {
                     objetoEncontrado = true;
                     jugador.coger(objetoACoger);
-                    getHabitacionActual().getObjetos()[i] = null; // Eliminar el objeto de la habitación
+                    getHabitacionActual().getObjetos().set(i, null); // Eliminar el objeto de la habitación
                     System.out.println("Has cogido " + objetoACoger.getNombre() + " y lo has añadido a tu inventario.");
                 } catch (AventuraException e) {
                     System.out.println(e.getMessage());
@@ -388,20 +389,7 @@ public class Juego {
      * Muestra los objetos presentes en la habitación actual.
      */
     private void mostrarObjetosHabitacion() {
-        System.out.print("Objetos en la habitación: ");
-        boolean hayObjetos = false;
-        boolean hayMasDeUnObjeto = false;
-        for (Objeto objeto : getHabitacionActual().getObjetos()) {
-            if (objeto != null && objeto.isVisible()) {
-                hayObjetos = true;
-                System.out.print(hayMasDeUnObjeto ? ", " + objeto : objeto);
-                hayMasDeUnObjeto = true;
-            }
-        }
-        if (!hayObjetos) {
-            System.out.print("No hay objetos.");
-        }
-        System.out.println();
+        getHabitacionActual().getObjetos().stream().filter(Objeto::isVisible).forEach(System.out::println);
     }
 
     /**
@@ -410,12 +398,7 @@ public class Juego {
      * @return true si hay al menos un objeto, false si no hay ninguno.
      */
     private boolean hayObjetosEnHabitacion() {
-        for (Objeto objeto : getHabitacionActual().getObjetos()) {
-            if (objeto != null) {
-                return true;
-            }
-        }
-        return false;
+        return getHabitacionActual().getObjetos().isEmpty();
     }
 
     /**
@@ -503,7 +486,7 @@ public class Juego {
      * Elimina un objeto del juego, ya sea que esté en la habitación o en el inventario.
      * Usado tras combinar objetos.
      */
-    private void consumirObjeto(Objeto obj) {
+    private void consumirObjeto(Objeto obj) throws AventuraException {
         // Intentamos borrar del inventario
         jugador.eliminarDeInventario(obj);
         // Intentamos borrar de la habitación
