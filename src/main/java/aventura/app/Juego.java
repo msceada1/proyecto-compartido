@@ -365,7 +365,6 @@ public class Juego {
                 else {
                     System.out.println("Has encontrado: " + abrible.getContenido().getNombre());
                     try {
-                        //TODO: Si hubiera más de un objeto dentro, habría que implementar un bucle aquí o hacer que el contenido sea una lista de objetos.
                         jugador.coger(abrible.getContenido());
                         System.out.println("Has cogido " + abrible.getContenido().getNombre() + " y lo has añadido a tu inventario.");
                         abrible.setContenido(null); // Vaciar el contenido del contenedor
