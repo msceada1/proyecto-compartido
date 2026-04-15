@@ -205,7 +205,6 @@ public class Juego {
      */
     private void cmdAbrir() {
         System.out.println("¿Qué contenedor quieres abrir?");
-        //TODO: Hacer que el método siguiente en lugar de mostrar devuelva una lista
         mostrarObjetosAbribles();
         String contenedorAAbrir = MiEntradaSalida.solicitarCadena("").trim();
 
