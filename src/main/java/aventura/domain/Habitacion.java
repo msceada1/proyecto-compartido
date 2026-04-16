@@ -98,7 +98,7 @@ public class Habitacion {
      *
      * @return Array de objetos en la habitación.
      */
-    public Objeto[] getObjetos() {
+    public List<Objeto> getObjetos() {
         return objetos;
     }
 
