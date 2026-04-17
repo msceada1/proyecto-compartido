@@ -5,9 +5,12 @@ import aventura.exceptions.AventuraException;
 import aventura.exceptions.InventarioLlenoException;
 import aventura.exceptions.ObjetoNoCompatibleException;
 import aventura.io.MiEntradaSalida;
+import aventura.io.Migrador;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * Clase principal del juego "Tu Propia Aventura".
@@ -22,6 +25,9 @@ public class Juego {
 
     // El mapa de habitaciones.
     private Habitacion[] habitaciones;
+
+    //El mapa de habitaciones
+    Map<String, Habitacion> salas = new HashMap<>();
 
     // El inventario ahora se ha movido a la clase Jugador
 
@@ -40,18 +46,20 @@ public class Juego {
         habitaciones = new Habitacion[3]; // Cambia el tamaño según el número de habitaciones que tengas
         this.jugador = jugador;
         inicializarJuego();
+
+
     }
 
     /**
      * Inicializa el juego creando las habitaciones y los objetos.
      */
     private void inicializarJuego() {
-
         descripcionJuego = "No sabes qué ha pasado. Justo cuando terminabas las clases te quedaste el último como siempre recogiendo tus cosas. " +
                 "Pero algo pasó. Lo último que recuerdas es que sentiste mucho frío y todo se volvió oscuro. Ahora estás en tu clase, pero es de noche y el instituto está cerrado." +
                 "¿Nadie te ha visto? ¿Por qué las limpiadoras no te han despertado?";
         //Cremos el escenario
         Habitacion aula103 = new Habitacion("El aula 103", "Es tu aula habitual");
+        salas.put(aula103.getNombre(), aula103);
         try {
             aula103.agregarObjeto(new Mueble("Estantería", "Una estantería llena de libros y cuadernos.", true));
             aula103.agregarObjeto(new Item("Llave", "Una llave pequeña de metal.", true));
@@ -62,6 +70,7 @@ public class Juego {
         }
 
         Habitacion pasillo = new Habitacion("El pasillo principal.", "El lugar que lo une todo");
+        salas.put(pasillo.getNombre(), pasillo);
         try {
             pasillo.agregarObjeto(new Contenedor("Taquilla", "Una taquilla metálica cerrada.", true, "LLAVE123", new PaloRotoLlave()));
             habitaciones[1] = pasillo;
@@ -70,6 +79,7 @@ public class Juego {
         }
 
         Habitacion aula105 = new Habitacion("El aula 105.","El aula mas alejada y siniestra");
+        salas.put(aula105.getNombre(), aula105);
         try {
             aula105.agregarObjeto(new Nota("Nota", "Una nota escrita a mano", true, "La llave está bajo la estantería."));
             aula105.agregarObjeto(new Mueble("Escritorio", "Un escritorio con varios papeles encima.", true));
@@ -85,10 +95,10 @@ public class Juego {
 
     public static void main(String[] args) {
         Juego juego = new Juego(new Jugador("Jugador1", "H1"));
+
         juego.iniciar();
 
         System.out.println("¡Gracias por jugar!");
-
     }
 
     public void iniciar() {
@@ -116,8 +126,6 @@ public class Juego {
             switch (comando) {
                 case "mirar" -> mostrarInfoHabitacion();
                 case "inventario" -> mostrarObjetosInventario();
-                case "ir izquierda" -> cmdIrIzquierda();
-                case "ir derecha" -> cmdIrDerecha();
                 case "coger" -> cmdCoger();
                 case "examinar" -> cmdExaminar();
                 case "abrir" -> cmdAbrir();
@@ -136,28 +144,12 @@ public class Juego {
     /**
      * Mueve al jugador a la habitación de la izquierda si es posible.
      */
-    private void cmdIrIzquierda() {
-        if (jugador.getHabitacionActual() > 0) {
-            jugador.setHabitacionActual(jugador.getHabitacionActual() - 1);
-            System.out.println("Te has movido a la habitación de la izquierda.");
-            mostrarInfoHabitacion();
-        } else {
-            System.out.println("No puedes ir más a la izquierda.");
-        }
-    }
+
 
     /**
      * Mueve al jugador a la habitación de la derecha si es posible.
      */
-    private void cmdIrDerecha() {
-        if (jugador.getHabitacionActual() < habitaciones.length - 1) {
-            jugador.setHabitacionActual(jugador.getHabitacionActual() + 1);
-            System.out.println("Te has movido a la habitación de la derecha.");
-            mostrarInfoHabitacion();
-        } else {
-            System.out.println("No puedes ir más a la derecha.");
-        }
-    }
+
 
     /**
      * Procesa el comando de coger un objeto de la habitación actual.
@@ -477,7 +469,7 @@ public class Juego {
      * @return La habitación en la que se encuentra el jugador.
      */
     private Habitacion getHabitacionActual() {
-        return habitaciones[jugador.getHabitacionActual()];
+        return habitaciones[Integer.parseInt(jugador.getHabitacionActual())];
     }
 
     /**

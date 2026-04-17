@@ -1,7 +1,9 @@
 package aventura.domain;
 
 import aventura.app.Juego;
+import aventura.io.ObjetoAdapter;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,7 +20,7 @@ public class CargadorAventura {
     private Path directorioBase;
 
     public CargadorAventura(){
-        this.gson = new Gson();
+        this.gson = new GsonBuilder().registerTypeAdapter(Objeto.class, new ObjetoAdapter()).setPrettyPrinting().create();
         this.ficheroProperty = Paths.get("config.properties");
         cargarConfiguracion();
     }

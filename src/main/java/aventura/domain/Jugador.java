@@ -32,6 +32,10 @@ public class Jugador {
     }
 
     public void setHabitacionActual(String habitacionActual) {
+        if (habitacionActual == null){
+            habitacionActual = "0";
+        }
+
         this.habitacionActual = habitacionActual;
     }
 
