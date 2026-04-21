@@ -62,7 +62,7 @@ public class Juego {
 
 
     public static void main(String[] args) {
-        Juego juego = new Juego(new Jugador("Jugador1", "El aula 103"));
+        Juego juego = new Juego(new Jugador("Jugador1", "El pasillo principal"));
 
         juego.iniciar();
 
@@ -94,6 +94,7 @@ public class Juego {
             switch (comando) {
                 case "mirar" -> mostrarInfoHabitacion();
                 case "inventario" -> mostrarObjetosInventario();
+                case "ir" -> cmdIr();
                 case "coger" -> cmdCoger();
                 case "examinar" -> cmdExaminar();
                 case "abrir" -> cmdAbrir();
@@ -160,6 +161,32 @@ public class Juego {
         }
     }
 
+    public void cmdIr(){
+        String direccion = MiEntradaSalida.solicitarCadena("¿Hacia qué dirección quieres ir? (Norte, Sur, Este u Oeste)").toLowerCase().trim();
+
+        Habitacion actual = getHabitacionActual();
+
+        if (actual.getSalidas() == null) {
+            System.out.println("Esta habitación no tiene salidas configuradas.");
+            return;
+        }
+
+        String idDestino = actual.getSalidas().get(direccion);
+
+        if (idDestino != null) {
+
+            if (habitaciones.containsKey(idDestino)) {
+                jugador.setHabitacionActual(idDestino);
+                System.out.println("Te mueves hacia: " + idDestino);
+                System.out.println("------------------------------------------");
+                System.out.println(getHabitacionActual().mirar());
+            } else {
+                System.out.println("Error de mapa: La sala '" + idDestino + "' no existe en el archivo de datos.");
+            }
+        } else {
+            System.out.println("No hay ninguna salida hacia el '" + direccion + "'.");
+        }
+    }
     /**
      * Procesa el comando de abrir un contenedor.
      */
