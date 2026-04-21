@@ -40,11 +40,11 @@ public class CargadorAventura {
         }
     }
 
-    public Juego cargarMundoBase() {
+    public AventuraConfig cargarMundoBase() {
         if (this.ficheroJson == null) return null;
 
         try (BufferedReader br = Files.newBufferedReader(this.ficheroJson)) {
-            return gson.fromJson(br, Juego.class);
+            return gson.fromJson(br, AventuraConfig.class);
         } catch (IOException e) {
             System.out.println(e.getMessage());
             return null;

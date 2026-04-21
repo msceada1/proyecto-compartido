@@ -24,10 +24,9 @@ public class Juego {
     private String descripcionJuego;
 
     // El mapa de habitaciones.
-    private Habitacion[] habitaciones;
 
     //El mapa de habitaciones
-    Map<String, Habitacion> salas = new HashMap<>();
+    Map<String, Habitacion> habitaciones;
 
     // El inventario ahora se ha movido a la clase Jugador
 
@@ -43,7 +42,7 @@ public class Juego {
      */
     public Juego(Jugador jugador) {
         // Inicialización del mapa de habitaciones
-        habitaciones = new Habitacion[3]; // Cambia el tamaño según el número de habitaciones que tengas
+        habitaciones = new HashMap<>(); // Cambia el tamaño según el número de habitaciones que tengas
         this.jugador = jugador;
         inicializarJuego();
 
@@ -54,47 +53,16 @@ public class Juego {
      * Inicializa el juego creando las habitaciones y los objetos.
      */
     private void inicializarJuego() {
-        descripcionJuego = "No sabes qué ha pasado. Justo cuando terminabas las clases te quedaste el último como siempre recogiendo tus cosas. " +
-                "Pero algo pasó. Lo último que recuerdas es que sentiste mucho frío y todo se volvió oscuro. Ahora estás en tu clase, pero es de noche y el instituto está cerrado." +
-                "¿Nadie te ha visto? ¿Por qué las limpiadoras no te han despertado?";
-        //Cremos el escenario
-        Habitacion aula103 = new Habitacion("El aula 103", "Es tu aula habitual");
-        salas.put(aula103.getNombre(), aula103);
-        try {
-            aula103.agregarObjeto(new Mueble("Estantería", "Una estantería llena de libros y cuadernos.", true));
-            aula103.agregarObjeto(new Item("Llave", "Una llave pequeña de metal.", true));
-            aula103.agregarObjeto(new MangoRotoLlave());
-            habitaciones[0] = aula103;
-        } catch (AventuraException e) {
-            System.err.println("Error al agregar objeto a la habitación: " + e.getMessage());
-        }
+        CargadorAventura cargadorAventura = new CargadorAventura();
+        AventuraConfig config = cargadorAventura.cargarMundoBase();
 
-        Habitacion pasillo = new Habitacion("El pasillo principal.", "El lugar que lo une todo");
-        salas.put(pasillo.getNombre(), pasillo);
-        try {
-            pasillo.agregarObjeto(new Contenedor("Taquilla", "Una taquilla metálica cerrada.", true, "LLAVE123", new PaloRotoLlave()));
-            habitaciones[1] = pasillo;
-        } catch (AventuraException e) {
-            System.err.println("Error al agregar objeto a la habitación: " + e.getMessage());
-        }
-
-        Habitacion aula105 = new Habitacion("El aula 105.","El aula mas alejada y siniestra");
-        salas.put(aula105.getNombre(), aula105);
-        try {
-            aula105.agregarObjeto(new Nota("Nota", "Una nota escrita a mano", true, "La llave está bajo la estantería."));
-            aula105.agregarObjeto(new Mueble("Escritorio", "Un escritorio con varios papeles encima.", true));
-            Llave llavePequeña = new Llave("Llave pequeña", "Una pequeña llave de metal.", true, "LLAVE123");
-            aula105.agregarObjeto(new Contenedor("Cajón del escritorio", "Un cajón de madera que parece cerrado.", true, llavePequeña));
-            aula105.agregarObjeto(new Contenedor("Cofre antiguo", "Un cofre de aspecto antiguo con un candado.", true, "LLAVEYZ", new Item("Mapa", "Un mapa del instituto.", true)));
-            habitaciones[2] = aula105;
-        } catch (AventuraException e) {
-            System.err.println("Error al agregar objeto a la habitación: " + e.getMessage());
-        }
+        this.habitaciones = config.getSala();
+        this.descripcionJuego = config.getDescripcion();
     }
 
 
     public static void main(String[] args) {
-        Juego juego = new Juego(new Jugador("Jugador1", "H1"));
+        Juego juego = new Juego(new Jugador("Jugador1", "El aula 103"));
 
         juego.iniciar();
 
@@ -111,7 +79,7 @@ public class Juego {
         System.out.println("------------------------------------------");
 
         //Muestra la descripción general del juego
-        System.out.println(descripcionJuego);
+        System.out.println(this.descripcionJuego);
 
         //Muestra la descripción de la primera habitación
         System.out.println(getHabitacionActual().mirar());
@@ -469,7 +437,7 @@ public class Juego {
      * @return La habitación en la que se encuentra el jugador.
      */
     private Habitacion getHabitacionActual() {
-        return habitaciones[Integer.parseInt(jugador.getHabitacionActual())];
+        return habitaciones.get(jugador.getHabitacionActual());
     }
 
     /**
