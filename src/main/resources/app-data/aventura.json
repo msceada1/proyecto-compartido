@@ -1,21 +1,26 @@
 {
   "descripcion": "No sabes qué ha pasado. Justo cuando terminabas las clases te quedaste el último como siempre recogiendo tus cosas. Pero algo pasó. Lo último que recuerdas es que sentiste mucho frío y todo se volvió oscuro. Ahora estás en tu clase, pero es de noche y el instituto está cerrado.¿Nadie te ha visto? ¿Por qué las limpiadoras no te han despertado?",
   "sala": {
-    "El aula 105.": {
-      "nombre": "El aula 105.",
+    "El aula 105": {
+      "nombre": "El aula 105",
       "descripcion": "El aula mas alejada y siniestra",
+      "salidas": {
+        "oeste":  "El pasillo principal"
+      },
       "objetos": [
         {
-          "texto": "La llave está bajo la estantería.",
+          "texto": "La llave está bajo la estantería",
           "visible": true,
           "nombre": "Nota",
           "descripcion": "Una nota escrita a mano",
           "tipo": "aventura.domain.Nota"
+
+
         },
         {
           "visible": true,
           "nombre": "Escritorio",
-          "descripcion": "Un escritorio con varios papeles encima.",
+          "descripcion": "Un escritorio con varios papeles encima",
           "tipo": "aventura.domain.Mueble"
         },
         {
@@ -24,13 +29,15 @@
             "codigoSeguridad": "LLAVE123",
             "visible": true,
             "nombre": "Llave pequeña",
-            "descripcion": "Una pequeña llave de metal.",
+            "descripcion": "Una pequeña llave de metal",
             "tipo": "aventura.domain.Llave"
+
           },
           "visible": true,
           "nombre": "Cajón del escritorio",
-          "descripcion": "Un cajón de madera que parece cerrado.",
+          "descripcion": "Un cajón de madera que parece cerrado",
           "tipo": "aventura.domain.Contenedor"
+
         },
         {
           "abierto": false,
@@ -38,19 +45,24 @@
           "contenido": {
             "visible": true,
             "nombre": "Mapa",
-            "descripcion": "Un mapa del instituto.",
+            "descripcion": "Un mapa del instituto",
             "tipo": "aventura.domain.Item"
           },
           "visible": true,
           "nombre": "Cofre antiguo",
-          "descripcion": "Un cofre de aspecto antiguo con un candado.",
+          "descripcion": "Un cofre de aspecto antiguo con un candado",
           "tipo": "aventura.domain.Contenedor"
         }
       ]
     },
-    "El pasillo principal.": {
-      "nombre": "El pasillo principal.",
+    "El pasillo principal": {
+      "nombre": "El pasillo principal",
       "descripcion": "El lugar que lo une todo",
+      "salidas":{
+        "oeste": "El aula 103",
+        "este": "El aula 105"
+
+      },
       "objetos": [
         {
           "abierto": false,
@@ -63,7 +75,7 @@
           },
           "visible": true,
           "nombre": "Taquilla",
-          "descripcion": "Una taquilla metálica cerrada.",
+          "descripcion": "Una taquilla metálica cerrada",
           "tipo": "aventura.domain.Contenedor"
         }
       ]
@@ -71,17 +83,20 @@
     "El aula 103": {
       "nombre": "El aula 103",
       "descripcion": "Es tu aula habitual",
+      "salidas": {
+        "este":  "El pasillo principal"
+      },
       "objetos": [
         {
           "visible": true,
           "nombre": "Estantería",
-          "descripcion": "Una estantería llena de libros y cuadernos.",
+          "descripcion": "Una estantería llena de libros y cuadernos",
           "tipo": "aventura.domain.Mueble"
         },
         {
           "visible": true,
           "nombre": "Llave",
-          "descripcion": "Una llave pequeña de metal.",
+          "descripcion": "Una llave pequeña de metal",
           "tipo": "aventura.domain.Item"
         },
         {
