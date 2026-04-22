@@ -7,8 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="nightClass" />
-        <module name="TrabajoEnPareja" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="TrabajoEnPareja" target="23" />
+    </bytecodeTargetLevel>
   </component>
 </project>
