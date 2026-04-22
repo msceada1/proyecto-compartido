@@ -136,8 +136,7 @@ public class Juego {
         Objeto objeto = buscarObjeto(objetoACoger);
         if (objeto == null) {
             System.out.println("No se encontró ningún objeto llamado " + objetoACoger + ".");
-        }
-        else {
+        } else {
             procesarComandoCoger(objeto);
         }
     }
@@ -161,7 +160,7 @@ public class Juego {
         }
     }
 
-    public void cmdIr(){
+    public void cmdIr() {
         String direccion = MiEntradaSalida.solicitarCadena("¿Hacia qué dirección quieres ir? (Norte, Sur, Este u Oeste)").toLowerCase().trim();
 
         Habitacion actual = getHabitacionActual();
@@ -187,6 +186,7 @@ public class Juego {
             System.out.println("No hay ninguna salida hacia el '" + direccion + "'.");
         }
     }
+
     /**
      * Procesa el comando de abrir un contenedor.
      */
@@ -214,7 +214,7 @@ public class Juego {
         String objeto1Nombre = MiEntradaSalida.solicitarCadena("Primer objeto: ").trim();
         Objeto objeto1 = buscarObjeto(objeto1Nombre);
 
-        if (objeto1 == null){
+        if (objeto1 == null) {
             System.out.printf("No se encontró %s%n", objeto1Nombre);
             return;
         }
@@ -294,6 +294,7 @@ public class Juego {
 
     /**
      * Procesa el comando de coger un objeto de la habitación actual.
+     *
      * @param objetoACoger El objeto que el jugador desea coger.
      */
     private void procesarComandoCoger(Objeto objetoACoger) {
@@ -319,6 +320,7 @@ public class Juego {
 
     /**
      * Procesa el comando de abrir un contenedor.
+     *
      * @param objeto El objeto que el jugador desea abrir.
      */
     private void procesarComandoAbrir(Objeto objeto) {
@@ -348,8 +350,7 @@ public class Juego {
             if (respuesta.esExito()) {
                 if (abrible.getContenido() == null) {
                     System.out.println("El contenedor está vacío.");
-                }
-                else {
+                } else {
                     System.out.println("Has encontrado: " + abrible.getContenido().getNombre());
                     try {
                         jugador.coger(abrible.getContenido());
@@ -374,7 +375,7 @@ public class Juego {
      * Muestra los objetos presentes en la habitación actual.
      */
     private void mostrarObjetosHabitacion() {
-        getHabitacionActual().getObjetos().stream().filter(Objeto::isVisible).forEach(System.out::println);
+        getHabitacionActual().getObjetos().stream().filter(o -> o != null && o.isVisible()).forEach(System.out::println);
     }
 
     /**
@@ -383,7 +384,7 @@ public class Juego {
      * @return true si hay al menos un objeto, false si no hay ninguno.
      */
     private boolean hayObjetosEnHabitacion() {
-        return getHabitacionActual().getObjetos().isEmpty();
+        return !getHabitacionActual().getObjetos().isEmpty();
     }
 
     /**
@@ -461,6 +462,7 @@ public class Juego {
 
     /**
      * Obtiene la habitación actual del jugador.
+     *
      * @return La habitación en la que se encuentra el jugador.
      */
     private Habitacion getHabitacionActual() {
@@ -473,9 +475,10 @@ public class Juego {
      */
     private void consumirObjeto(Objeto obj) throws AventuraException {
         // Intentamos borrar del inventario
-        jugador.eliminarDeInventario(obj);
-        // Intentamos borrar de la habitación
-        getHabitacionActual().eliminarObjeto(obj);
+        if (!jugador.eliminarDeInventario(obj)){
+            // Intentamos borrar de la habitación
+            getHabitacionActual().eliminarObjeto(obj);
+        }
     }
 
 }

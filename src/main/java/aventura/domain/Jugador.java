@@ -56,6 +56,7 @@ public class Jugador {
         2. Que haya espacio en el inventario
         */
 
+
         if (!(objeto instanceof Inventariable)) {
             throw new AventuraException("El objeto %s no se puede coger.".formatted(objeto.getNombre()));
         }
